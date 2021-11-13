@@ -33,7 +33,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'CLIENT_ID',
-                quoted(getProperty("$projectDir/../../../services/codebreaker.properties",'client_id'))
+                quoted(getProperty("$projectDir/../../../services/interview-prep.properties",'client_id'))
 
         javaCompileOptions {
             annotationProcessorOptions {
