@@ -8,18 +8,18 @@
   <fragment
     android:id="@+id/nav_home"
     android:label="@string/menu_home"
-    android:name="edu.cnm.deepdive.interviewprep.controller.ui.home.HomeFragment"
+    android:name="edu.cnm.deepdive.interviewprep.controller.HomeFragment"
     tools:layout="@layout/fragment_home"/>
 
   <fragment
-    android:id="@+id/nav_gallery"
-    android:label="@string/menu_gallery"
-    android:name="edu.cnm.deepdive.interviewprep.controller.ui.gallery.GalleryFragment"
-    tools:layout="@layout/fragment_gallery"/>
+    android:id="@+id/nav_detail"
+    android:label="@string/menu_detail"
+    android:name="edu.cnm.deepdive.interviewprep.controller.DetailFragment"
+    tools:layout="@layout/fragment_detail"/>
 
   <fragment
-    android:id="@+id/nav_slideshow"
-    android:label="@string/menu_slideshow"
-    android:name="edu.cnm.deepdive.interviewprep.controller.ui.slideshow.SlideshowFragment"
-    tools:layout="@layout/fragment_slideshow"/>
+    android:id="@+id/nav_quiz"
+    android:label="@string/menu_quiz"
+    android:name="edu.cnm.deepdive.interviewprep.controller.QuizFragment"
+    tools:layout="@layout/fragment_quiz"/>
 </navigation>

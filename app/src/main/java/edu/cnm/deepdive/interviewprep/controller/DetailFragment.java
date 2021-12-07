@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.interviewprep.controller.ui.gallery;
+package edu.cnm.deepdive.interviewprep.controller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,23 +10,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import edu.cnm.deepdive.interviewprep.databinding.FragmentGalleryBinding;
+import edu.cnm.deepdive.interviewprep.databinding.FragmentDetailBinding;
+import edu.cnm.deepdive.interviewprep.viewmodel.DetailViewModel;
 
-public class GalleryFragment extends Fragment {
+public class DetailFragment extends Fragment {
 
-  private GalleryViewModel galleryViewModel;
-  private FragmentGalleryBinding binding;
+  private DetailViewModel detailViewModel;
+  private FragmentDetailBinding binding;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
-    galleryViewModel =
-        new ViewModelProvider(this).get(GalleryViewModel.class);
+    detailViewModel =
+        new ViewModelProvider(this).get(DetailViewModel.class);
 
-    binding = FragmentGalleryBinding.inflate(inflater, container, false);
+    binding = FragmentDetailBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
     final TextView textView = binding.textGallery;
-    galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    detailViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
       @Override
       public void onChanged(@Nullable String s) {
         textView.setText(s);

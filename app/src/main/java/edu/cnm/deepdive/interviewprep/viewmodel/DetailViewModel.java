@@ -1,16 +1,16 @@
-package edu.cnm.deepdive.interviewprep.controller.ui.home;
+package edu.cnm.deepdive.interviewprep.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class DetailViewModel extends ViewModel {
 
   private MutableLiveData<String> mText;
 
-  public HomeViewModel() {
+  public DetailViewModel() {
     mText = new MutableLiveData<>();
-    mText.setValue("This is home fragment");
+    mText.setValue("This is gallery fragment");
   }
 
   public LiveData<String> getText() {
