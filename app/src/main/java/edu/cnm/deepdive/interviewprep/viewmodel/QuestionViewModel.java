@@ -34,6 +34,10 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     return questions;
   }
 
+  public LiveData<Throwable> getThrowable() {
+    return throwable;
+  }
+
   public void refreshQuestions() {
     pending.add(
         repository

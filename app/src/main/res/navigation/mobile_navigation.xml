@@ -3,13 +3,13 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/mobile_navigation"
-  app:startDestination="@+id/nav_home">
+  app:startDestination="@+id/nav_question">
 
   <fragment
-    android:id="@+id/nav_home"
-    android:label="@string/menu_home"
-    android:name="edu.cnm.deepdive.interviewprep.controller.HomeFragment"
-    tools:layout="@layout/fragment_home"/>
+    android:id="@+id/nav_question"
+    android:label="@string/menu_question"
+    android:name="edu.cnm.deepdive.interviewprep.controller.QuestionFragment"
+    tools:layout="@layout/fragment_question"/>
 
   <fragment
     android:id="@+id/nav_detail"
@@ -22,4 +22,10 @@
     android:label="@string/menu_quiz"
     android:name="edu.cnm.deepdive.interviewprep.controller.QuizFragment"
     tools:layout="@layout/fragment_quiz"/>
+
+  <fragment
+    android:id="@+id/nav_history"
+    android:label="@string/menu_history"
+    android:name="edu.cnm.deepdive.interviewprep.controller.HistoryFragment"
+      tools:layout="@layout/fragment_history"/>
 </navigation>
