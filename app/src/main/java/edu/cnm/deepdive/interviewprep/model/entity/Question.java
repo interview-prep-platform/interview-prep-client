@@ -1,8 +1,12 @@
 package edu.cnm.deepdive.interviewprep.model.entity;
 
+import com.google.gson.annotations.Expose;
+
 public class Question {
-private long id;
-private String questionText;
+
+  private long id;
+  @Expose
+  private String question;
 
   public long getId() {
     return id;
@@ -13,11 +17,11 @@ private String questionText;
   }
 
   public String getQuestionText() {
-    return questionText;
+    return question;
   }
 
   public void setQuestionText(String questionText) {
-    this.questionText = questionText;
+    this.question = question;
   }
 
   public String getQuestionAnswer() {
@@ -29,6 +33,5 @@ private String questionText;
   }
 
   private String questionAnswer;
-
 
 }
