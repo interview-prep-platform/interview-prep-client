@@ -2,6 +2,7 @@ package edu.cnm.deepdive.interviewprep.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
@@ -13,15 +14,21 @@ import java.util.List;
 
 public class QuestionItemAdapter extends Adapter<Holder> {
 
+
+
   private final Context context;
   private final List<Question> questions;
   private final LayoutInflater inflater;
+  private final OnQuestionClickHelper onQuestionClickHelper;
 
-  public QuestionItemAdapter(Context context,
-      List<Question> questions) {
+
+    public QuestionItemAdapter(Context context,
+      List<Question> questions, OnQuestionClickHelper onQuestionClickHelper) {
     this.context = context;
     this.questions = questions;
+    this.onQuestionClickHelper = onQuestionClickHelper;
     inflater = LayoutInflater.from(context);
+
   }
 
   @NonNull
@@ -52,8 +59,14 @@ public class QuestionItemAdapter extends Adapter<Holder> {
     private void bind(int position) {
       Question question = questions.get(position);
       binding.question.setText(question.getQuestionText());
+      binding.getRoot()
+          .setOnClickListener((view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
     }
 
+  }
+
+  public interface OnQuestionClickHelper {
+    void onQuestionClick(long id, View view);
   }
 
 }

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import edu.cnm.deepdive.interviewprep.adapter.QuestionItemAdapter;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuestionBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
@@ -35,7 +36,7 @@ public class QuestionFragment extends Fragment {
     questionViewModel
         .getQuestions()
         .observe(getViewLifecycleOwner(), (questions) -> {
-          QuestionItemAdapter adapter = new QuestionItemAdapter(getContext(), questions);
+          QuestionItemAdapter adapter = new QuestionItemAdapter(getContext(), questions, this::showQuestionDetail);
           binding.history.setAdapter(adapter);
         });
   }
@@ -46,4 +47,13 @@ public class QuestionFragment extends Fragment {
     super.onDestroyView();
     binding = null;
   }
+
+  private void showQuestionDetail(long id, View view) {
+    QuestionFragmentDirections.OpenQuestionDetail toQuestionDetail
+        = QuestionFragmentDirections.openQuestionDetail();
+    toQuestionDetail.setQuestionId(id);
+    Navigation.findNavController(view).navigate(toQuestionDetail);
+  }
+
+
 }
