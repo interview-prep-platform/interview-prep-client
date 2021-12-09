@@ -29,7 +29,15 @@ public class DetailFragment extends Fragment {
     super.onCreate(savedInstanceState);
     QuestionFragmentArgs args = QuestionFragmentArgs.fromBundle(getArguments());
     questionId = args.getQuestionId();
-    questionViewModel.refreshQuestion(questionId);
+  }
+
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    super.onCreateView(inflater, container, savedInstanceState);
+    binding = FragmentDetailBinding.inflate(inflater, container, false);
+    return binding.getRoot();
   }
 
   @Override
@@ -37,6 +45,7 @@ public class DetailFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     //noinspection ConstantConditions
     questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+    questionViewModel.refreshQuestion(questionId);
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
@@ -46,4 +55,5 @@ public class DetailFragment extends Fragment {
           binding.sourceText.setText(question.getSource());
         });
   }
+
 }

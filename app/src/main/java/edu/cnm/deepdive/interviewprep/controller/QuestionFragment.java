@@ -50,7 +50,6 @@ public class QuestionFragment extends Fragment {
   }
 
   private void showQuestionDetail(String id, View view) {
-    questionViewModel.refreshQuestion(id);
     QuestionFragmentDirections.OpenQuestionDetail toQuestionDetail
         = QuestionFragmentDirections.openQuestionDetail();
     toQuestionDetail.setQuestionId(id);
