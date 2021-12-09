@@ -11,6 +11,12 @@
     android:name="edu.cnm.deepdive.interviewprep.controller.QuestionFragment"
     tools:layout="@layout/fragment_question">
 
+    <argument
+      android:name="question_id"
+      app:argType="long"
+      android:defaultValue="0L"
+      />
+
     <action
       android:id="@+id/open_question_detail"
       app:destination="@id/nav_detail">

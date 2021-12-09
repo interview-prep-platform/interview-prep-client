@@ -8,11 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentDetailBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.DetailViewModel;
+import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 
 public class DetailFragment extends Fragment {
 
   private long questionId;
-  private DetailViewModel detailViewModel;
+  private QuestionViewModel questionViewModel;
   private FragmentDetailBinding binding;
 
   @Override
@@ -24,19 +25,17 @@ public class DetailFragment extends Fragment {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    QuestionFragmentArgs args = QuestionFragmentArgs.fromBundle(getArguments());
+    questionId = args.getQuestionId();
   }
 
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-//noinspection ConstantConditions
-    detailViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-//    if (getArguments() != null) {
-//      QuestionFragmentArgs args = QuestionFragmentArgs.fromBundle(getArguments());
-//      questionId = args.questionId();
-//    }
-//    detailViewModel
+    //noinspection ConstantConditions
+//    questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+//    questionViewModel
 //        .getQuestion()
 //        .observe(getViewLifecycleOwner(), (question) -> {
 //          binding.questionText.setText(question.getQuestion());
