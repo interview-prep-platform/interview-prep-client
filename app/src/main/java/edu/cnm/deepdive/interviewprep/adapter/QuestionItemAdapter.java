@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import edu.cnm.deepdive.interviewprep.adapter.QuestionItemAdapter.Holder;
 import edu.cnm.deepdive.interviewprep.databinding.ItemQuestionBinding;
-import edu.cnm.deepdive.interviewprep.model.entity.Question;
+import edu.cnm.deepdive.interviewprep.model.Question;
 import java.util.List;
 
 public class QuestionItemAdapter extends Adapter<Holder> {
@@ -59,7 +59,7 @@ public class QuestionItemAdapter extends Adapter<Holder> {
 
     private void bind(int position) {
       Question question = questions.get(position);
-      binding.question.setText(question.getQuestionText());
+      binding.question.setText(question.getQuestion());
       binding.getRoot()
           .setOnClickListener((view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
     }
@@ -67,7 +67,7 @@ public class QuestionItemAdapter extends Adapter<Holder> {
   }
 
   public interface OnQuestionClickHelper {
-    void onQuestionClick(long id, View view);
+    void onQuestionClick(String id, View view);
   }
 
 }

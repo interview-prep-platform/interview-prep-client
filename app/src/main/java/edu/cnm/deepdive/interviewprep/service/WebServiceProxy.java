@@ -3,7 +3,7 @@ package edu.cnm.deepdive.interviewprep.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.interviewprep.BuildConfig;
-import edu.cnm.deepdive.interviewprep.model.entity.Question;
+import edu.cnm.deepdive.interviewprep.model.Question;
 import io.reactivex.Single;
 import java.util.List;
 import okhttp3.OkHttpClient;
@@ -14,7 +14,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface WebServiceProxy {
 
@@ -27,6 +27,9 @@ public interface WebServiceProxy {
 
   @GET("questions")
   Single<List<Question>> getQuestions(@Header("Authorization") String bearerToken);
+
+  @GET("questions/{questionId}")
+  Single<Question> getQuestion(@Path("questionId") String questionId, @Header("Authorization") String bearerToken);
 
   static WebServiceProxy getInstance() {
     return InstanceHolder.INSTANCE;

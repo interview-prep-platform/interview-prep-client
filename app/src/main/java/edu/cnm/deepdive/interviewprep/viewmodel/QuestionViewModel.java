@@ -8,7 +8,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import edu.cnm.deepdive.interviewprep.model.entity.Question;
+import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
@@ -17,6 +17,7 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
 
   private final QuestionRepository repository;
   private final MutableLiveData<List<Question>> questions;
+  private final MutableLiveData<Question> question;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
 
@@ -24,6 +25,7 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     super(application);
     repository = new QuestionRepository();
     questions = new MutableLiveData<>();
+    question = new MutableLiveData<>();
 //    rankings = new RankingLiveData(trigger);
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
@@ -32,6 +34,10 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
 
   public LiveData<List<Question>> getQuestions() {
     return questions;
+  }
+
+  public LiveData<Question> getQuestion() {
+    return question;
   }
 
   public LiveData<Throwable> getThrowable() {
@@ -44,6 +50,17 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
             .getQuestions()
             .subscribe(
                 questions::postValue,
+                this::postThrowable
+            )
+    );
+  }
+
+  public void refreshQuestion(String questionId) {
+    pending.add(
+        repository
+            .getQuestion(questionId)
+            .subscribe(
+                question::postValue,
                 this::postThrowable
             )
     );

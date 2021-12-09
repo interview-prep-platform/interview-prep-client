@@ -13,8 +13,8 @@
 
     <argument
       android:name="question_id"
-      app:argType="long"
-      android:defaultValue="0L"
+      app:argType="string"
+      android:defaultValue="0"
       />
 
     <action
@@ -23,8 +23,8 @@
 
       <argument
         android:name="question_id"
-        app:argType="long"
-        android:defaultValue="0L"/>
+        app:argType="string"
+        android:defaultValue="0"/>
     </action>
   </fragment>
 
