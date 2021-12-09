@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     // menu should be considered as top level destinations.
     appBarConfiguration = new Builder(
         //changes the text in the top of the screen
-        R.id.nav_home, R.id.nav_detail, R.id.nav_quiz)
+        R.id.nav_question, R.id.nav_quiz, R.id.nav_history)
         .setOpenableLayout(drawer)
         .build();
     NavController navController = Navigation.findNavController(this,

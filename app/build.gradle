@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs'
 }
+apply plugin: 'androidx.navigation.safeargs'
 
 String getLocalProperty(String name) {
     Properties properties = new Properties()
@@ -32,8 +33,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField 'String', 'BASE_URL', quoted(
+                getProperty("$projectDir/../../../services/interview-prep.properties", 'base_url'))
+
         buildConfigField 'String', 'CLIENT_ID',
-                quoted(getProperty("$projectDir/../../../services/interview-prep.properties",'client_id'))
+                quoted(getProperty("$projectDir/../../../services/interview-prep.properties", 'client_id'))
 
         javaCompileOptions {
             annotationProcessorOptions {

@@ -2,31 +2,39 @@ package edu.cnm.deepdive.interviewprep.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import edu.cnm.deepdive.interviewprep.adapter.QuestionItemAdapter.Holder;
 import edu.cnm.deepdive.interviewprep.databinding.ItemQuestionBinding;
-import edu.cnm.deepdive.interviewprep.model.entity.Question;
+import edu.cnm.deepdive.interviewprep.model.Question;
 import java.util.List;
 
 public class QuestionItemAdapter extends Adapter<Holder> {
 
+
+
   private final Context context;
   private final List<Question> questions;
   private final LayoutInflater inflater;
+  private final OnQuestionClickHelper onQuestionClickHelper;
 
-  public QuestionItemAdapter(Context context,
-      List<Question> questions) {
+
+    public QuestionItemAdapter(Context context,
+      List<Question> questions, OnQuestionClickHelper onQuestionClickHelper) {
     this.context = context;
     this.questions = questions;
+    this.onQuestionClickHelper = onQuestionClickHelper;
     inflater = LayoutInflater.from(context);
+
   }
 
   @NonNull
   @Override
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
     return new Holder(ItemQuestionBinding.inflate(inflater, parent, false));
   }
 
@@ -51,9 +59,15 @@ public class QuestionItemAdapter extends Adapter<Holder> {
 
     private void bind(int position) {
       Question question = questions.get(position);
-      binding.question.setText(question.getQuestionText());
+      binding.question.setText(question.getQuestion());
+      binding.getRoot()
+          .setOnClickListener((view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
     }
 
+  }
+
+  public interface OnQuestionClickHelper {
+    void onQuestionClick(String id, View view);
   }
 
 }

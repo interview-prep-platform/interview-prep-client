@@ -10,24 +10,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import edu.cnm.deepdive.interviewprep.viewmodel.HomeViewModel;
-import edu.cnm.deepdive.interviewprep.databinding.FragmentHomeBinding;
+import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizBinding;
+import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 
-public class HomeFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
-  private HomeViewModel homeViewModel;
-  private FragmentHomeBinding binding;
+  private QuizViewModel quizViewModel;
+  private FragmentQuizBinding binding;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
-    homeViewModel =
-        new ViewModelProvider(this).get(HomeViewModel.class);
+    quizViewModel =
+        new ViewModelProvider(this).get(QuizViewModel.class);
 
-    binding = FragmentHomeBinding.inflate(inflater, container, false);
+    binding = FragmentQuizBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-    final TextView textView = binding.textHome;
-    homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    final TextView textView = binding.textSlideshow;
+    quizViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
       @Override
       public void onChanged(@Nullable String s) {
         textView.setText(s);
