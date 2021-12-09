@@ -36,7 +36,8 @@ public class QuestionFragment extends Fragment {
     questionViewModel
         .getQuestions()
         .observe(getViewLifecycleOwner(), (questions) -> {
-          QuestionItemAdapter adapter = new QuestionItemAdapter(getContext(), questions, this::showQuestionDetail);
+          QuestionItemAdapter adapter = new QuestionItemAdapter(getContext(), questions,
+              this::showQuestionDetail);
           binding.history.setAdapter(adapter);
         });
   }

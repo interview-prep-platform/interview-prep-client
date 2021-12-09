@@ -34,6 +34,7 @@ public class QuestionItemAdapter extends Adapter<Holder> {
   @NonNull
   @Override
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
     return new Holder(ItemQuestionBinding.inflate(inflater, parent, false));
   }
 
