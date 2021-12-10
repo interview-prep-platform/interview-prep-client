@@ -25,6 +25,9 @@ public interface WebServiceProxy {
   @GET("questions")
   Single<List<Question>> getQuestions(@Header("Authorization") String bearerToken);
 
+  @GET("questions/random")
+  Single<Question> getRandomQuestion(@Header("Authorization") String bearerToken);
+
   @GET("questions/{questionId}")
   Single<Question> getQuestion(@Path("questionId") String questionId,
       @Header("Authorization") String bearerToken);
