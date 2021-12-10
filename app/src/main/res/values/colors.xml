@@ -14,4 +14,6 @@
   <color name="submit">#ff00ff00</color>
   <color name="cancel">#ffff0000</color>
 
+  <color name="edit">#FF0000FF</color>
+
 </resources>

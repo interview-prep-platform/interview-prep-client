@@ -22,13 +22,6 @@ import retrofit2.http.Path;
 
 public interface WebServiceProxy {
 
-//  @POST("games")
-//  Single<GameWithGuesses> startGame(@Body Game game, @Header("Authorization") String bearerToken);
-//
-//  @POST("games/{gameId}/guesses")
-//  Single<Guess> submitGuess(@Body Guess guess, @Path("gameId") String gameId,
-//      @Header("Authorization") String bearerToken);
-
   @GET("questions")
   Single<List<Question>> getQuestions(@Header("Authorization") String bearerToken);
 
@@ -45,7 +38,7 @@ public interface WebServiceProxy {
       @Header("Authorization") String bearerToken);
 
   @DELETE("questions/{questionId}")
-  Single<Question> deleteQuestion(@Path("questionId") String questionId,
+  void deleteQuestion(@Path("questionId") String questionId,
       @Header("Authorization") String bearerToken);
 
   static WebServiceProxy getInstance() {

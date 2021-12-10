@@ -40,7 +40,7 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
       question.setQuestion(binding.question.getText().toString().trim());
       question.setAnswer(binding.answer.getText().toString().trim());
       question.setSource(binding.source.getText().toString().trim());
-      viewModel.save(question);
+      viewModel.updateQuestion(question);
       dismiss();
     });
     return binding.getRoot();

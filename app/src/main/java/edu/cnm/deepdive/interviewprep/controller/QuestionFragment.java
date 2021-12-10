@@ -1,11 +1,13 @@
 package edu.cnm.deepdive.interviewprep.controller;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -39,7 +41,25 @@ public class QuestionFragment extends Fragment {
         .getQuestions()
         .observe(getViewLifecycleOwner(), (questions) -> {
           QuestionItemAdapter adapter = new QuestionItemAdapter(getContext(), questions,
-              this::showQuestionDetail);
+              this::editQuestion,
+              (question, v) -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Are you sure you want to delete this?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int id) {
+                        //TODO Return to this and create deleteQuestio
+//                        questionViewModel.deleteQuestion(question);
+                      }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                      }
+                    });
+                AlertDialog alert = builder.create();
+                alert.show();
+              }, this::showQuestionDetail);
           binding.history.setAdapter(adapter);
         });
   }

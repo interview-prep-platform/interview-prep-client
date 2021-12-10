@@ -24,9 +24,9 @@ public class QuestionItemAdapter extends Adapter<Holder> {
 
 
   public QuestionItemAdapter(Context context,
-      List<Question> questions, OnQuestionClickHelper onQuestionClickHelper,
+      List<Question> questions,
       OnQuestionEditHelper onQuestionEditHelper,
-      OnQuestionDeleteHelper onQuestionDeleteHelper
+      OnQuestionDeleteHelper onQuestionDeleteHelper, OnQuestionClickHelper onQuestionClickHelper
   ) {
     this.context = context;
     this.onQuestionEditHelper = onQuestionEditHelper;
@@ -67,6 +67,11 @@ public class QuestionItemAdapter extends Adapter<Holder> {
     private void bind(int position) {
       Question question = questions.get(position);
       binding.question.setText(question.getQuestion());
+      binding.questionEdit.setOnClickListener(
+          (v) -> onQuestionEditHelper.onQuestionClick(question.getId(), v));
+      binding.questionDelete.setOnClickListener(
+          (v) -> onQuestionDeleteHelper.onQuestionClick(question, v));
+
       binding.getRoot()
           .setOnClickListener(
               (view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
@@ -77,6 +82,22 @@ public class QuestionItemAdapter extends Adapter<Holder> {
   public interface OnQuestionClickHelper {
 
     void onQuestionClick(String id, View view);
+  }
+
+  /**
+   * A helper class to aid in editing a {@link Question} object.
+   */
+  public interface OnQuestionEditHelper {
+
+    void onQuestionClick(String id, View view);
+  }
+
+  /**
+   * A helper class to aid in deleting a {@link Question} object.
+   */
+  public interface OnQuestionDeleteHelper {
+
+    void onQuestionClick(Question question, View view);
   }
 
 }

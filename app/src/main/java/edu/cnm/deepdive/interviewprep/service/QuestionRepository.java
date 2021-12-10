@@ -41,4 +41,13 @@ public class QuestionRepository {
         .subscribeOn(Schedulers.io());
 
   }
+
+  public Single<Question> createQuestion(Question question) {
+    return signInRepository
+        .refreshBearerToken()
+        .flatMap((token) ->
+            proxy.createQuestion(question, token))
+        .subscribeOn(Schedulers.io());
+
+  }
 }
