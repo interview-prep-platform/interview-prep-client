@@ -2,6 +2,7 @@ package edu.cnm.deepdive.interviewprep.controller;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,11 @@ public class QuestionFragment extends Fragment {
     binding = FragmentQuestionBinding.inflate(inflater, container, false);
     binding.addQuestion.setOnClickListener((v) ->
 //        v -> editQuestion("0", v));
-        Navigation.findNavController(binding.getRoot())
-            .navigate(QuestionFragmentDirections.openQuestion()));
+    {
+      Log.d(getClass().getSimpleName(),"Trying to create a new question.");
+      Navigation.findNavController(binding.getRoot())
+          .navigate(QuestionFragmentDirections.openQuestion());
+    });
     return binding.getRoot();
   }
 

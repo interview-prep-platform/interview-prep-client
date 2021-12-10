@@ -50,7 +50,7 @@ public class QuizFragment extends Fragment {
     //Todo Check that we dont have duplicate questions!
     if (item.getItemId() == R.id.new_quiz) {
       handled = true;
-      quizQuestions = quizViewModel.startQuiz();
+//      quizQuestions = quizViewModel.startQuiz();
     } else {
       handled = super.onOptionsItemSelected(item);
     }

@@ -9,13 +9,14 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.interviewprep.model.Question;
+import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
 import edu.cnm.deepdive.interviewprep.service.QuizRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
 public class QuestionViewModel extends AndroidViewModel implements DefaultLifecycleObserver {
 
-  private final QuizRepository repository;
+  private final QuestionRepository repository;
   private final MutableLiveData<List<Question>> questions;
   private final MutableLiveData<Question> question;
   private final MutableLiveData<Throwable> throwable;
@@ -23,7 +24,7 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
 
   public QuestionViewModel(@NonNull Application application) {
     super(application);
-    repository = new QuizRepository();
+    repository = new QuestionRepository();
     questions = new MutableLiveData<>();
     question = new MutableLiveData<>();
 //    rankings = new RankingLiveData(trigger);
