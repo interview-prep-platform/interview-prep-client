@@ -2,6 +2,7 @@ package edu.cnm.deepdive.interviewprep.controller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 
@@ -26,13 +28,6 @@ public class QuizFragment extends Fragment {
     binding = FragmentQuizBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-//    final TextView textView = binding.textSlideshow;
-//    quizViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//      @Override
-//      public void onChanged(@Nullable String s) {
-//        textView.setText(s);
-//      }
-//    });
     return root;
   }
 
@@ -40,5 +35,24 @@ public class QuizFragment extends Fragment {
   public void onDestroyView() {
     super.onDestroyView();
     binding = null;
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    quizViewModel.startQuiz();
+  }
+
+
+  @Override
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    boolean handled;
+    if (item.getItemId() == R.id.new_quiz) {
+      handled = true;
+      viewModel.startGame();
+    } else {
+      handled = super.onOptionsItemSelected(item);
+    }
+    return handled;
   }
 }
