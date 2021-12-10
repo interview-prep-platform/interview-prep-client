@@ -28,8 +28,10 @@ public class QuestionFragment extends Fragment {
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentQuestionBinding.inflate(inflater, container, false);
-    binding.addQuestion.setOnClickListener(
-        v -> editQuestion("0", v));
+    binding.addQuestion.setOnClickListener((v) ->
+//        v -> editQuestion("0", v));
+        Navigation.findNavController(binding.getRoot())
+            .navigate(QuestionFragmentDirections.openQuestion()));
     return binding.getRoot();
   }
 

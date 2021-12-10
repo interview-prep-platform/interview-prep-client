@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs'
 }
-apply plugin: 'androidx.navigation.safeargs'
 
 String getLocalProperty(String name) {
     Properties properties = new Properties()
