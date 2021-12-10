@@ -6,6 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".controller.QuestionFragment">
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/history"
     android:layout_width="0dp"
@@ -17,6 +18,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     tools:listitem="@layout/item_question"/>
+
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/add_question"
     android:layout_width="wrap_content"
@@ -25,7 +27,8 @@
     android:layout_gravity="bottom|end"
     app:srcCompat="@android:drawable/ic_input_add"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    app:layout_constraintEnd_toEndOf="parent"
+    android:contentDescription="@string/adds_a_new_question_label"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
