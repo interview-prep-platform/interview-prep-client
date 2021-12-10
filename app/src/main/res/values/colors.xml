@@ -11,4 +11,7 @@
   <color name="yellow">#FFEB3B</color>
   <color name="green">#4CAF50</color>
 
+  <color name="submit">#ff00ff00</color>
+  <color name="cancel">#ffff0000</color>
+
 </resources>

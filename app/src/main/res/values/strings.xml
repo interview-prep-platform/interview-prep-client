@@ -18,4 +18,9 @@
   <string name="menu_detail">Question Detail</string>
   <string name="menu_quiz">Quiz</string>
   <string name="menu_history">History</string>
+  <string name="question_hint">Enter Question</string>
+  <string name="save_label">Save</string>
+  <string name="cancel_label">Cancel</string>
+  <string name="answer_hint">Answer</string>
+  <string name="source_hint">Source</string>
 </resources>

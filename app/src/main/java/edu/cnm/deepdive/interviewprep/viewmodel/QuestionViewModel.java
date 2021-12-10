@@ -55,6 +55,17 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     );
   }
 
+  public void save(Question question) {
+    pending.add(
+        repository
+            .updateQuestion(question)
+            .subscribe(
+                this.question::postValue,
+                this::postThrowable
+            )
+    );
+  }
+
   public void refreshQuestion(String questionId) {
     pending.add(
         repository

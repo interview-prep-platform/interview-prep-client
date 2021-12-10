@@ -15,16 +15,23 @@ import java.util.List;
 public class QuestionItemAdapter extends Adapter<Holder> {
 
 
-
   private final Context context;
   private final List<Question> questions;
   private final LayoutInflater inflater;
   private final OnQuestionClickHelper onQuestionClickHelper;
+  private final OnQuestionEditHelper onQuestionEditHelper;
+  private final OnQuestionDeleteHelper onQuestionDeleteHelper;
 
 
-    public QuestionItemAdapter(Context context,
-      List<Question> questions, OnQuestionClickHelper onQuestionClickHelper) {
+  public QuestionItemAdapter(Context context,
+      List<Question> questions, OnQuestionClickHelper onQuestionClickHelper,
+      OnQuestionEditHelper onQuestionEditHelper,
+      OnQuestionDeleteHelper onQuestionDeleteHelper
+  ) {
     this.context = context;
+    this.onQuestionEditHelper = onQuestionEditHelper;
+    this.onQuestionDeleteHelper = onQuestionDeleteHelper;
+
     this.questions = questions;
     this.onQuestionClickHelper = onQuestionClickHelper;
     inflater = LayoutInflater.from(context);
@@ -61,12 +68,14 @@ public class QuestionItemAdapter extends Adapter<Holder> {
       Question question = questions.get(position);
       binding.question.setText(question.getQuestion());
       binding.getRoot()
-          .setOnClickListener((view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
+          .setOnClickListener(
+              (view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
     }
 
   }
 
   public interface OnQuestionClickHelper {
+
     void onQuestionClick(String id, View view);
   }
 

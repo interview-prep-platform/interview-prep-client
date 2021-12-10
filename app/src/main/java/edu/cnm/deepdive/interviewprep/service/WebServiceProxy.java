@@ -12,8 +12,12 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface WebServiceProxy {
@@ -29,7 +33,20 @@ public interface WebServiceProxy {
   Single<List<Question>> getQuestions(@Header("Authorization") String bearerToken);
 
   @GET("questions/{questionId}")
-  Single<Question> getQuestion(@Path("questionId") String questionId, @Header("Authorization") String bearerToken);
+  Single<Question> getQuestion(@Path("questionId") String questionId,
+      @Header("Authorization") String bearerToken);
+
+  @PUT("questions/{questionId}")
+  Single<Question> updateQuestion(@Body Question question,
+      @Header("Authorization") String bearerToken);
+
+  @POST("questions")
+  Single<Question> createQuestion(@Body Question question,
+      @Header("Authorization") String bearerToken);
+
+  @DELETE("questions/{questionId}")
+  Single<Question> deleteQuestion(@Path("questionId") String questionId,
+      @Header("Authorization") String bearerToken);
 
   static WebServiceProxy getInstance() {
     return InstanceHolder.INSTANCE;

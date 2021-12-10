@@ -26,6 +26,8 @@ public class QuestionFragment extends Fragment {
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentQuestionBinding.inflate(inflater, container, false);
+    binding.addQuestion.setOnClickListener(
+        v -> editQuestion("0", v));
     return binding.getRoot();
   }
 
@@ -56,5 +58,9 @@ public class QuestionFragment extends Fragment {
     Navigation.findNavController(view).navigate(toQuestionDetail);
   }
 
+  private void editQuestion(String id, View view) {
+    Navigation.findNavController(binding.getRoot())
+        .navigate(QuestionFragmentDirections.openQuestion().setQuestionId(id));
+  }
 
 }

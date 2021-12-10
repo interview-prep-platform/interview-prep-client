@@ -26,6 +26,18 @@
         app:argType="string"
         android:defaultValue="0"/>
     </action>
+
+    <action
+      android:id="@+id/open_question"
+      app:destination="@id/nav_edit_question">
+
+      <argument
+        android:name="question_id"
+        app:argType="string"
+        android:defaultValue="0"
+        />
+    </action>
+
   </fragment>
 
   <fragment
@@ -45,4 +57,18 @@
     android:label="@string/menu_history"
     android:name="edu.cnm.deepdive.interviewprep.controller.HistoryFragment"
     tools:layout="@layout/fragment_history"/>
+
+  <dialog
+    android:id="@+id/nav_edit_question"
+    android:name="edu.cnm.deepdive.interviewprep.controller.EditQuestionFragment"
+    tools:layout="@layout/fragment_edit_question">
+
+    <argument
+      android:name="question_id"
+      app:argType="string"
+      android:defaultValue="0"
+      />
+  </dialog>
+
+
 </navigation>
