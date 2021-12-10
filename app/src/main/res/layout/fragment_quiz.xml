@@ -110,25 +110,30 @@
     android:id="@+id/left_arrow"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="@dimen/half_dynamic_spacing"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    android:src="@drawable/ic_check_black_24dp"
-    android:tint="@color/submit"
+    android:padding="@dimen/half_dynamic_spacing"
     android:background="?android:selectableItemBackgroundBorderless"
-    app:layout_constraintTop_toTopOf="@id/source_text"
+    android:contentDescription="@string/save_label"
+    android:src="@drawable/ic_baseline_arrow_circle_left_24"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/right_arrow"
     app:layout_constraintStart_toStartOf="parent"
-    android:contentDescription="@string/save_label"/>
-
+    app:layout_constraintTop_toBottomOf="@id/source_text"
+    app:layout_constraintVertical_bias="1.0"
+    app:tint="@color/black"/>
   <ImageButton
     android:id="@+id/right_arrow"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     android:padding="@dimen/half_dynamic_spacing"
-    android:src="@drawable/ic_close_black_24dp"
-    android:tint="@color/cancel"
-    app:layout_constraintTop_toTopOf="@id/question_text"
+    android:src="@drawable/ic_baseline_arrow_circle_right_24"
+    app:layout_constraintTop_toBottomOf="@id/source_text"
+    app:layout_constraintStart_toEndOf="@id/left_arrow"
     app:layout_constraintEnd_toEndOf="parent"
-    android:contentDescription="@string/cancel_label"/>
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintVertical_bias="1.0"
+    android:contentDescription="@string/cancel_label"
+    app:tint="@color/black"/>
   
 </androidx.constraintlayout.widget.ConstraintLayout>
