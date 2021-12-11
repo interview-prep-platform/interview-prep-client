@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/nav_question"
-    android:label="java.util.UUID/menu_question"
+    android:label="@string/menu_question"
     android:name="edu.cnm.deepdive.interviewprep.controller.QuestionFragment"
     tools:layout="@layout/fragment_question">
 
@@ -45,19 +45,19 @@
 
   <fragment
     android:id="@+id/nav_detail"
-    android:label="java.util.UUID/menu_detail"
+    android:label="@string/menu_detail"
     android:name="edu.cnm.deepdive.interviewprep.controller.DetailFragment"
     tools:layout="@layout/fragment_detail"/>
 
   <fragment
     android:id="@+id/nav_quiz"
-    android:label="java.util.UUID/menu_quiz"
+    android:label="@string/menu_quiz"
     android:name="edu.cnm.deepdive.interviewprep.controller.QuizFragment"
     tools:layout="@layout/fragment_quiz"/>
 
   <fragment
     android:id="@+id/nav_history"
-    android:label="java.util.UUID/menu_history"
+    android:label="@string/menu_history"
     android:name="edu.cnm.deepdive.interviewprep.controller.HistoryFragment"
     tools:layout="@layout/fragment_history"/>
 

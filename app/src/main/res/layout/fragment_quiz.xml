@@ -6,6 +6,11 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".controller.QuizFragment">
+  <androidx.viewpager.widget.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
   <TextView
     android:id="@+id/question_label"
     android:layout_width="match_parent"
@@ -135,5 +140,8 @@
     app:layout_constraintVertical_bias="1.0"
     android:contentDescription="@string/cancel_label"
     app:tint="@color/black"/>
-  
+
+  </androidx.viewpager.widget.ViewPager>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
