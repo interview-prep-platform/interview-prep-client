@@ -10,7 +10,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
-import edu.cnm.deepdive.interviewprep.service.QuizRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
@@ -66,7 +65,8 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
             )
     );
   }
-public void createQuestion(Question question) {
+
+  public void createQuestion(Question question) {
     pending.add(
         repository
             .createQuestion(question)
@@ -86,6 +86,17 @@ public void createQuestion(Question question) {
                 this::postThrowable
             )
     );
+  }
+
+  public void deleteQuestion(String questionId) {
+//    pending.add(
+//        repository
+//            .deleteQuestion(questionId)
+//            .subscribe(
+//                () -> {},
+//                this::postThrowable
+//            )
+//    );
   }
 
   @Override

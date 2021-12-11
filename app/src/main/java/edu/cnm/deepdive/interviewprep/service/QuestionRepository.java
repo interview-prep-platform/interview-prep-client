@@ -50,4 +50,14 @@ public class QuestionRepository {
         .subscribeOn(Schedulers.io());
 
   }
+
+  public void deleteQuestion(String questionId) {
+    //Todo Return and implement delete question.
+//    signInRepository
+//        .refreshBearerToken()
+//        .flatMap((token) ->
+//            proxy.deleteQuestion(questionId, token))
+//        .subscribeOn(Schedulers.io());
+  }
+
 }

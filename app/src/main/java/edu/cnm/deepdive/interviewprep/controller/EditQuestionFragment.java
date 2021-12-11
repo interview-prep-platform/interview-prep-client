@@ -13,12 +13,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentEditQuestionBinding;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
+import java.util.UUID;
 
 public class EditQuestionFragment extends BottomSheetDialogFragment implements TextWatcher {
 
   private FragmentEditQuestionBinding binding;
   private QuestionViewModel viewModel;
-  private String questionId;
+  private UUID questionId;
   private Question question;
 
   @Override
@@ -40,7 +41,7 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
       question.setQuestion(binding.question.getText().toString().trim());
       question.setAnswer(binding.answer.getText().toString().trim());
       question.setSource(binding.source.getText().toString().trim());
-      viewModel.updateQuestion(question);
+      viewModel.createQuestion(question);
       dismiss();
     });
     return binding.getRoot();
@@ -50,7 +51,7 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
-    if (Integer.valueOf(questionId) != 0) {
+    if (questionId != null) {
     } else {
       question = new Question();
     }

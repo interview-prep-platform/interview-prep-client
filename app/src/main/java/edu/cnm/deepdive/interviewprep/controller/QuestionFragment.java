@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import edu.cnm.deepdive.interviewprep.adapter.QuestionItemAdapter;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuestionBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
+import java.util.UUID;
 
 public class QuestionFragment extends Fragment {
 
@@ -32,7 +33,7 @@ public class QuestionFragment extends Fragment {
     binding.addQuestion.setOnClickListener((v) ->
 //        v -> editQuestion("0", v));
     {
-      Log.d(getClass().getSimpleName(),"Trying to create a new question.");
+      Log.d(getClass().getSimpleName(), "Trying to create a new question.");
       Navigation.findNavController(binding.getRoot())
           .navigate(QuestionFragmentDirections.openQuestion());
     });
@@ -54,8 +55,7 @@ public class QuestionFragment extends Fragment {
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                       public void onClick(DialogInterface dialog, int id) {
-                        //TODO Return to this and create deleteQuestio
-//                        questionViewModel.deleteQuestion(question);
+                        questionViewModel.deleteQuestion(question.getId());
                       }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -80,13 +80,13 @@ public class QuestionFragment extends Fragment {
   private void showQuestionDetail(String id, View view) {
     QuestionFragmentDirections.OpenQuestionDetail toQuestionDetail
         = QuestionFragmentDirections.openQuestionDetail();
-    toQuestionDetail.setQuestionId(id);
+    toQuestionDetail.setQuestionId(UUID.fromString(id));
     Navigation.findNavController(view).navigate(toQuestionDetail);
   }
 
   private void editQuestion(String id, View view) {
     Navigation.findNavController(binding.getRoot())
-        .navigate(QuestionFragmentDirections.openQuestion().setQuestionId(id));
+        .navigate(QuestionFragmentDirections.openQuestion().setQuestionId(UUID.fromString(id)));
   }
 
 }
