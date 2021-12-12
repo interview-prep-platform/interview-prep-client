@@ -70,7 +70,9 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
                   int indexOfQuestion = questions.indexOf(question2);
                   questions.set(indexOfQuestion, postedQuestion);
                   this.questions.postValue(questions);
-                })
+                },
+                this::postThrowable
+            )
     );
   }
 
