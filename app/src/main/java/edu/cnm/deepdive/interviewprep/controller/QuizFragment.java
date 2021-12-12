@@ -18,6 +18,9 @@ import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 import java.util.List;
 
+/**
+ * Fragment for displaying a quiz.
+ */
 public class QuizFragment extends Fragment {
 
   private QuizViewModel quizViewModel;
@@ -27,6 +30,14 @@ public class QuizFragment extends Fragment {
   ViewPager viewPager;
   public static final String ARG_OBJECT = "object";
 
+  /**
+   * Overrides the onCreateView method in Fragment.  Instantiates local variables. Inflates (sets up
+   * and displays) the layout as specified in fragment_quiz.xml.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   * @param container          a {@link ViewGroup}.
+   * @param inflater           a {@link LayoutInflater}.
+   */
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
     quizViewModel =
@@ -44,6 +55,14 @@ public class QuizFragment extends Fragment {
     binding = null;
   }
 
+  /**
+   * Overrides the onViewCreated method in Fragment.  Specifically, interacts with the question
+   * pager adapter to display a list of questions from the database that the user can use to quiz
+   * themselves.
+   *
+   * @param view               a {@link View}.
+   * @param savedInstanceState a {@link Bundle}.
+   */
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -53,11 +72,16 @@ public class QuizFragment extends Fragment {
 
   }
 
-
+  /**
+   * Overrides the onOptionsItemSelected method in AppCompatActivity.  Specifies what to do if the
+   * user clicks on each menu item (Sign out versus Settings).
+   *
+   * @param item a menu item.
+   * @return a boolean representing if the item was handled successfully or not.
+   */
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     boolean handled;
-    //Todo Check that we dont have duplicate questions!
     if (item.getItemId() == R.id.new_quiz) {
       handled = true;
 //      quizQuestions = quizViewModel.startQuiz();
@@ -66,6 +90,11 @@ public class QuizFragment extends Fragment {
     }
     return handled;
   }
+
+  /**
+   * Populates {@link Question}s into a Viewpage Adapter as specified by the accompanying item
+   * layout.
+   */
 
   public class QuestionPagerAdapter extends FragmentStatePagerAdapter {
 

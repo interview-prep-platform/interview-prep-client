@@ -18,12 +18,24 @@ import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.ActivityMainBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.LoginViewModel;
 
+/**
+ * Interacts with the {@link LoginViewModel} to log the user into the application. Uses the visual
+ * layout for the login screen as specified by the activity_login layout in res/layout. Sets up the
+ * navigation structure that allows users to navigate throughout the app.
+ */
 public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration appBarConfiguration;
   private ActivityMainBinding binding;
   private LoginViewModel loginViewModel;
 
+  /**
+   * Overrides the onCreate method in AppCompatActivity.  Instantiates local variables.
+   * Specifically, uses layout screens as defined in the activity_main layout in res/layout. Sets up
+   * the navigation structure that allows users to navigate throughout the app.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -59,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
     NavigationUI.setupWithNavController(navigationView, navController);
   }
 
+  /**
+   * Overrides the onCreateOptionsMenu method in AppCompatActivity. Creates two menu options (Sign
+   * out and Settings) as specified in the res/menu main.xml file.
+   *
+   * @param menu a menu item.
+   * @return a boolean representing if the menu was created successfully or not.
+   */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  /**
+   * Overrides the onOptionsItemSelected method in AppCompatActivity.  Specifies what to do if the
+   * user clicks on each menu item (Sign out versus Settings).
+   *
+   * @param item a menu item.
+   * @return a boolean representing if the item was handled successfully or not.
+   */
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     boolean handled;
@@ -78,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
     return handled;
   }
 
+  /**
+   * Initiates a navigation bar.
+   *
+   * @return boolean value if the user navigated to the top level navigation.
+   */
   @Override
   public boolean onSupportNavigateUp() {
     NavController navController = Navigation.findNavController(this,

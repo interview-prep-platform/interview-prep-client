@@ -12,6 +12,11 @@ import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.ActivityLoginBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.LoginViewModel;
 
+
+/**
+ * Interacts with the {@link LoginViewModel} to log the user into the application. Uses the visual
+ * layout for the login screen as specified by the activity_main layout in res/layout.
+ */
 public class LoginActivity extends AppCompatActivity {
 
   private ActivityLoginBinding binding; //when added activity login layout file, automatically got created for us
@@ -19,11 +24,20 @@ public class LoginActivity extends AppCompatActivity {
   private ActivityResultLauncher<Intent> launcher;
   private boolean silent;
 
+  /**
+   * Overrides the onCreate method in AppCompatActivity.  Instantiates local variables.
+   * Specifically, starts and completes the SignIn process through screens as defined in the
+   * activity_login layout in res/layout.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    viewModel = new ViewModelProvider(this).get(LoginViewModel.class); //in case of activity, always going to be this.
-    getLifecycle().addObserver(viewModel); // we said that loginviewmodel implements defaultlifecycleobserver
+    viewModel = new ViewModelProvider(this).get(
+        LoginViewModel.class); //in case of activity, always going to be this.
+    getLifecycle().addObserver(
+        viewModel); // we said that loginviewmodel implements defaultlifecycleobserver
     launcher = registerForActivityResult(new StartActivityForResult(), viewModel::completeSignIn);
     silent = true;
     viewModel.getAccount().observe(this, this::handleAccount);
@@ -46,11 +60,12 @@ public class LoginActivity extends AppCompatActivity {
       startActivity(intent);
     } else if (silent) {
       silent = false;
-      binding = ActivityLoginBinding.inflate(getLayoutInflater()); //activity doesn't have a parent: therefore, different actions here
+      binding = ActivityLoginBinding.inflate(
+          getLayoutInflater()); //activity doesn't have a parent: therefore, different actions here
       //Attach listener to login button
       //Display a UI that has a sign-in button
       binding.signIn.setOnClickListener((v) ->
-        viewModel.startSignIn(launcher));
+          viewModel.startSignIn(launcher));
       setContentView(binding.getRoot());
     }
   }

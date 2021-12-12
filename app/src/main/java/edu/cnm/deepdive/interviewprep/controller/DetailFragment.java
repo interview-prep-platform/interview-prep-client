@@ -13,6 +13,9 @@ import edu.cnm.deepdive.interviewprep.databinding.FragmentDetailBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 import java.util.UUID;
 
+/**
+ * Implements logic to display a detail view of Question.
+ */
 public class DetailFragment extends Fragment {
 
   private UUID questionId;
@@ -25,6 +28,12 @@ public class DetailFragment extends Fragment {
     binding = null;
   }
 
+  /**
+   * Overrides the onCreateView method in Fragment.  Initially gets QuestionId argument from the
+   * Question Fragment.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   */
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -32,6 +41,14 @@ public class DetailFragment extends Fragment {
     questionId = args.getQuestionId();
   }
 
+  /**
+   * Overrides the onCreateView method in Fragment. Inflates (sets up and displays) the layout as
+   * specified in fragment_detail.xml.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   * @param container          a {@link ViewGroup}.
+   * @param inflater           a {@link LayoutInflater}.
+   */
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -40,6 +57,14 @@ public class DetailFragment extends Fragment {
     binding = FragmentDetailBinding.inflate(inflater, container, false);
     return binding.getRoot();
   }
+
+  /**
+   * Overrides the onViewCreated method in Fragment.  Specifically, interacts with the {@link
+   * QuestionViewModel} to get a question from the server as specified by the questionId.
+   *
+   * @param view               a {@link View}.
+   * @param savedInstanceState a {@link Bundle}.
+   */
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

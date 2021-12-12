@@ -10,10 +10,22 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 
+/**
+ * Implements logic to display a history to the user.
+ */
 public class HistoryFragment extends Fragment {
 
   private QuizViewModel quizViewModel;
   private FragmentQuizBinding binding;
+
+  /**
+   * Overrides the onCreateView method in Fragment. Inflates (sets up and displays) the layout as
+   * specified in fragment_history.xml.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   * @param container          a {@link ViewGroup}.
+   * @param inflater           a {@link LayoutInflater}.
+   */
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {

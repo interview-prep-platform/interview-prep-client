@@ -13,6 +13,10 @@ import edu.cnm.deepdive.interviewprep.service.QuizRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
+/**
+ * Implements the business logic behind the application.  Interacts with the QuizRepository to
+ * perform CRUD operations on the server.
+ */
 public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleObserver {
 
   private final QuizRepository repository;
@@ -22,29 +26,49 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
   private final CompositeDisposable pending;
   private List<LiveData<Question>> quizQuestions;
 
+
+  /**
+   * Class constructor.  Instantiates local class variables. Additionally, gets a question from the
+   * server.
+   *
+   * @param application an application.
+   */
   public QuizViewModel(@NonNull Application application) {
     super(application);
     repository = new QuizRepository();
     questions = new MutableLiveData<>();
     question = new MutableLiveData<>();
-//    rankings = new RankingLiveData(trigger);
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     refreshQuestion();
   }
 
+  /**
+   * Returns the local questions variable.
+   *
+   * @return a reactivex {@link LiveData} {@link List} object of type {@link Question}.
+   */
   public LiveData<List<Question>> getQuestions() {
     return questions;
   }
 
+  /**
+   * Returns the local question variable.
+   *
+   * @return a reactivex {@link LiveData} object of type {@link Question}.
+   */
   public LiveData<Question> getQuestion() {
     return question;
   }
 
-  public LiveData<Throwable> getThrowable() {
+  private LiveData<Throwable> getThrowable() {
     return throwable;
   }
 
+  /**
+   * gets a list of all questions from the question repository. Additionally, subscribes to the
+   * result and puts the result in the local variable questions.
+   */
   public void refreshQuestion() {
     pending.add(
         repository
@@ -67,11 +91,11 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
     this.throwable.postValue(throwable);
   }
 
-  public List<LiveData<Question>> startQuiz() {
-    for (int i = 0; i < 3; i++) {
-      quizQuestions.add(getQuestion());
-
-    }
-    return quizQuestions;
-  }
+//  public List<LiveData<Question>> startQuiz() {
+//    for (int i = 0; i < 3; i++) {
+//      quizQuestions.add(getQuestion());
+//
+//    }
+//    return quizQuestions;
+//  }
 }
