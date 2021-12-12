@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -62,9 +63,14 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
         repository
             .updateQuestion(question)
             .subscribe(
-                this.question::postValue,
-                this::postThrowable
-            )
+                (postedQuestion) -> {
+                  this.question.postValue(postedQuestion);
+                  List<Question> questions = this.questions.getValue();
+                  Question question2 = findQuestion(postedQuestion.getId(), questions);
+                  int indexOfQuestion = questions.indexOf(question2);
+                  questions.set(indexOfQuestion, postedQuestion);
+                  this.questions.postValue(questions);
+                })
     );
   }
 
@@ -121,5 +127,13 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     this.throwable.postValue(throwable);
   }
 
+  private Question findQuestion(UUID questionId, List<Question> questions) {
+    for(Question question : questions) {
+      if(question.getId().equals(questionId)) {
+        return question;
+      }
+    }
+    return null;
+  }
 
 }

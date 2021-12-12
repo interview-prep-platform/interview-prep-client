@@ -40,7 +40,7 @@ public class QuestionRepository {
     return signInRepository
         .refreshBearerToken()
         .flatMap((token) ->
-            proxy.updateQuestion(question, token))
+            proxy.updateQuestion(question.getId(),question, token))
         .subscribeOn(Schedulers.io());
 
   }

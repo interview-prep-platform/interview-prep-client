@@ -35,7 +35,7 @@ public interface WebServiceProxy {
       @Header("Authorization") String bearerToken);
 
   @PUT("questions/{questionId}")
-  Single<Question> updateQuestion(@Body Question question,
+  Single<Question> updateQuestion(@Path("questionId") UUID questionId, @Body Question question,
       @Header("Authorization") String bearerToken);
 
   @POST("questions")
