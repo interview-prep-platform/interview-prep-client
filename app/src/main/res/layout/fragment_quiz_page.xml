@@ -106,36 +106,6 @@
     tools:text="www.source.com"
     />
 
-  <ImageButton
-    android:id="@+id/left_arrow"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:padding="@dimen/half_dynamic_spacing"
-    android:background="?android:selectableItemBackgroundBorderless"
-    android:contentDescription="@string/save_label"
-    android:src="@drawable/ic_baseline_arrow_circle_left_24"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/right_arrow"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/source_text"
-    app:layout_constraintVertical_bias="1.0"
-    app:tint="@color/black"/>
-  <ImageButton
-    android:id="@+id/right_arrow"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:padding="@dimen/half_dynamic_spacing"
-    android:src="@drawable/ic_baseline_arrow_circle_right_24"
-    app:layout_constraintTop_toBottomOf="@id/source_text"
-    app:layout_constraintStart_toEndOf="@id/left_arrow"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintVertical_bias="1.0"
-    android:contentDescription="@string/cancel_label"
-    app:tint="@color/black"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

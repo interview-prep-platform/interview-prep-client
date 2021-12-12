@@ -16,6 +16,7 @@ import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.adapter.QuizQuestionAdapter;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizBinding;
 import edu.cnm.deepdive.interviewprep.model.Question;
+import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class QuizFragment extends Fragment {
 
-  private QuizViewModel quizViewModel;
+  private QuestionViewModel viewModel;
   private FragmentQuizBinding binding;
   private List<Question> quizQuestions;
   public static final String ARG_OBJECT = "object";
@@ -39,9 +40,6 @@ public class QuizFragment extends Fragment {
    */
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
-    quizViewModel =
-        new ViewModelProvider(this).get(QuizViewModel.class);
-
     binding = FragmentQuizBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
@@ -66,8 +64,8 @@ public class QuizFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    quizViewModel = new ViewModelProvider(this).get(QuizViewModel.class);
-    quizViewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
+    viewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    viewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
       QuizQuestionAdapter adapter = new QuizQuestionAdapter(this, questions);
       binding.pager.setAdapter(adapter);
     });

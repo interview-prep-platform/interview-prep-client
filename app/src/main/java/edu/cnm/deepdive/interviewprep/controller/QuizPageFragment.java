@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizPageBinding;
+import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 import java.util.UUID;
 
 public class QuizPageFragment extends Fragment {
 
   private UUID questionId;
   private FragmentQuizPageBinding binding;
+  private QuestionViewModel questionViewModel;
 
 
   @Override
@@ -36,6 +39,16 @@ public class QuizPageFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    questionViewModel.refreshQuestion(questionId);
+    questionViewModel//can only observe on live data
+        .getQuestion()
+        .observe(getViewLifecycleOwner(), (question) -> {
+          Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
+          binding.questionText.setText(question.getQuestion());
+          binding.answerText.setText(question.getAnswer());
+          binding.sourceText.setText(question.getSource());
+        });
   }
 
   @Override
