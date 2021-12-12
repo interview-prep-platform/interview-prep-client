@@ -39,11 +39,16 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
     binding.cancel.setOnClickListener((v) -> dismiss());
     binding.save.setOnClickListener((v) -> {
       question = new Question();
-      question.setId(questionId);
       question.setQuestion(binding.question.getText().toString().trim());
       question.setAnswer(binding.answer.getText().toString().trim());
       question.setSource(binding.source.getText().toString().trim());
-      viewModel.updateQuestion(question);
+      if (questionId != null) {
+        question.setId(questionId);
+        viewModel.updateQuestion(question);
+      }
+      else {
+        viewModel.createQuestion(question);
+      }
       dismiss();
     });
     return binding.getRoot();

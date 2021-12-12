@@ -31,9 +31,7 @@ public class QuestionFragment extends Fragment {
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentQuestionBinding.inflate(inflater, container, false);
     binding.addQuestion.setOnClickListener((v) ->
-//        v -> editQuestion("0", v));
     {
-      Log.d(getClass().getSimpleName(), "Trying to create a new question.");
       Navigation.findNavController(binding.getRoot())
           .navigate(QuestionFragmentDirections.openQuestion());
     });
