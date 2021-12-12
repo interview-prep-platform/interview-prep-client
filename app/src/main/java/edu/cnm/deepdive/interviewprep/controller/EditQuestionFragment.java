@@ -20,6 +20,7 @@ import java.util.UUID;
  * Implements logic to edit a question.
  */
 
+
 public class EditQuestionFragment extends BottomSheetDialogFragment implements TextWatcher {
 
   private FragmentEditQuestionBinding binding;
