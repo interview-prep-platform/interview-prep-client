@@ -18,5 +18,28 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     tools:text="This is a Question"/>
-
+  <ImageButton
+    android:id="@+id/question_edit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_mode_edit_black_24dp"
+    app:tint="@color/edit"
+    android:background="?android:selectableItemBackgroundBorderless"
+    android:padding="@dimen/half_dynamic_spacing"
+    app:layout_constraintEnd_toStartOf="@id/question_delete"
+    app:layout_constraintTop_toTopOf="@id/question"
+    app:layout_constraintTop_toBottomOf="@id/question"
+    />
+  <ImageButton
+    android:id="@+id/question_delete"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:tint="@color/cancel"
+    android:background="?android:selectableItemBackgroundBorderless"
+    android:padding="@dimen/half_dynamic_spacing"
+    android:src="@drawable/ic_close_black_24dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/question"
+    app:layout_constraintTop_toBottomOf="@id/question"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
