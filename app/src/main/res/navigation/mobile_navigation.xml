@@ -11,12 +11,6 @@
     android:name="edu.cnm.deepdive.interviewprep.controller.QuestionFragment"
     tools:layout="@layout/fragment_question">
 
-    <argument
-      android:name="question_id"
-      app:nullable="true"
-      app:argType="java.util.UUID"
-      android:defaultValue="@null"
-      />
 
     <action
       android:id="@+id/open_question_detail"
@@ -47,7 +41,18 @@
     android:id="@+id/nav_detail"
     android:label="@string/menu_detail"
     android:name="edu.cnm.deepdive.interviewprep.controller.DetailFragment"
-    tools:layout="@layout/fragment_detail"/>
+    tools:layout="@layout/fragment_detail">
+
+
+    <argument
+        android:name="question_id"
+        app:nullable="true"
+        app:argType="java.util.UUID"
+        android:defaultValue="@null"/>
+
+
+
+  </fragment>
 
   <fragment
     android:id="@+id/nav_quiz"

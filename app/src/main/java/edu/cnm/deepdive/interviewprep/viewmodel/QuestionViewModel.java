@@ -11,7 +11,9 @@ import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 public class QuestionViewModel extends AndroidViewModel implements DefaultLifecycleObserver {
 
@@ -71,13 +73,18 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
         repository
             .createQuestion(question)
             .subscribe(
-                this.question::postValue,
+                (postedQuestion) -> {
+                  this.question.postValue(postedQuestion);
+                  List<Question> questions = this.questions.getValue();
+                  questions.add(postedQuestion);
+                  this.questions.postValue(questions);
+                },
                 this::postThrowable
             )
     );
   }
 
-  public void refreshQuestion(String questionId) {
+  public void refreshQuestion(UUID questionId) {
     pending.add(
         repository
             .getQuestion(questionId)
@@ -88,15 +95,19 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     );
   }
 
-  public void deleteQuestion(String questionId) {
-//    pending.add(
-//        repository
-//            .deleteQuestion(questionId)
-//            .subscribe(
-//                () -> {},
-//                this::postThrowable
-//            )
-//    );
+  public void deleteQuestion(UUID questionId) {
+    pending.add(
+        repository
+            .deleteQuestion(questionId)
+            .subscribe(
+                () -> {
+                  List<Question> questions = this.questions.getValue();
+                  questions.removeIf((question) -> question.getId().equals(questionId));
+                  this.questions.postValue(questions);
+                },
+                this::postThrowable
+            )
+    );
   }
 
   @Override

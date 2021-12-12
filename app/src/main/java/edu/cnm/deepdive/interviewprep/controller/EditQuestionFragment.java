@@ -50,8 +50,14 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    viewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+    viewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
     if (questionId != null) {
+      viewModel.refreshQuestion(questionId);
+      viewModel.getQuestion().observe(getViewLifecycleOwner(), (question) -> {
+        binding.question.setText(question.getQuestion());
+        binding.answer.setText(question.getAnswer());
+        binding.source.setText(question.getSource());
+      });
     } else {
       question = new Question();
     }

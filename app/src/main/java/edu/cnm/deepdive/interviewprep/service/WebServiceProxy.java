@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.interviewprep.BuildConfig;
 import edu.cnm.deepdive.interviewprep.model.Question;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.List;
+import java.util.UUID;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
@@ -29,7 +31,7 @@ public interface WebServiceProxy {
   Single<Question> getRandomQuestion(@Header("Authorization") String bearerToken);
 
   @GET("questions/{questionId}")
-  Single<Question> getQuestion(@Path("questionId") String questionId,
+  Single<Question> getQuestion(@Path("questionId") UUID questionId,
       @Header("Authorization") String bearerToken);
 
   @PUT("questions/{questionId}")
@@ -41,7 +43,7 @@ public interface WebServiceProxy {
       @Header("Authorization") String bearerToken);
 
   @DELETE("questions/{questionId}")
-  void deleteQuestion(@Path("questionId") String questionId,
+  Completable deleteQuestion(@Path("questionId") UUID questionId,
       @Header("Authorization") String bearerToken);
 
   static WebServiceProxy getInstance() {

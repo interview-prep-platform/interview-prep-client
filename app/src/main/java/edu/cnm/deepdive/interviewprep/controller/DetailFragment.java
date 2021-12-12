@@ -28,7 +28,7 @@ public class DetailFragment extends Fragment {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    QuestionFragmentArgs args = QuestionFragmentArgs.fromBundle(getArguments());
+    DetailFragmentArgs args = DetailFragmentArgs.fromBundle(getArguments());
     questionId = args.getQuestionId();
   }
 
@@ -46,7 +46,7 @@ public class DetailFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     //noinspection ConstantConditions
     questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
-    questionViewModel.refreshQuestion(questionId.toString());
+    questionViewModel.refreshQuestion(questionId);
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {

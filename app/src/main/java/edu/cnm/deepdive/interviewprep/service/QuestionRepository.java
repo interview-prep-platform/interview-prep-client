@@ -1,9 +1,13 @@
 package edu.cnm.deepdive.interviewprep.service;
 
 import edu.cnm.deepdive.interviewprep.model.Question;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Collection;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.UUID;
 
 public class QuestionRepository {
 
@@ -20,12 +24,11 @@ public class QuestionRepository {
   public Single<List<Question>> getQuestions() {
     return signInRepository
         .refreshBearerToken()
-        .flatMap((token) ->
-            proxy.getQuestions(token))
+        .flatMap(proxy::getQuestions)
         .subscribeOn(Schedulers.io());
   }
 
-  public Single<Question> getQuestion(String questionId) {
+  public Single<Question> getQuestion(UUID questionId) {
     return signInRepository
         .refreshBearerToken()
         .flatMap((token) ->
@@ -51,13 +54,12 @@ public class QuestionRepository {
 
   }
 
-  public void deleteQuestion(String questionId) {
-    //Todo Return and implement delete question.
-//    signInRepository
-//        .refreshBearerToken()
-//        .flatMap((token) ->
-//            proxy.deleteQuestion(questionId, token))
-//        .subscribeOn(Schedulers.io());
+  public Completable deleteQuestion(UUID questionId) {
+    return signInRepository
+        .refreshBearerToken()
+        .flatMapCompletable((token) ->
+            proxy.deleteQuestion(questionId, token))
+        .subscribeOn(Schedulers.io());
   }
 
 }

@@ -43,23 +43,23 @@ public class QuestionFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+    questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
     questionViewModel
         .getQuestions()
         .observe(getViewLifecycleOwner(), (questions) -> {
           QuestionItemAdapter adapter = new QuestionItemAdapter(getContext(), questions,
               this::editQuestion,
-              (question, v) -> {
+              (id, v) -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Are you sure you want to delete this?")
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int id) {
-                        questionViewModel.deleteQuestion(question.getId());
+                      public void onClick(DialogInterface dialog, int which) {
+                        questionViewModel.deleteQuestion(id);
                       }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int id) {
+                      public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                       }
                     });
@@ -77,16 +77,16 @@ public class QuestionFragment extends Fragment {
     binding = null;
   }
 
-  private void showQuestionDetail(String id, View view) {
+  private void showQuestionDetail(UUID id, View view) {
     QuestionFragmentDirections.OpenQuestionDetail toQuestionDetail
         = QuestionFragmentDirections.openQuestionDetail();
-    toQuestionDetail.setQuestionId(UUID.fromString(id));
+    toQuestionDetail.setQuestionId(id);
     Navigation.findNavController(view).navigate(toQuestionDetail);
   }
 
-  private void editQuestion(String id, View view) {
+  private void editQuestion(UUID id, View view) {
     Navigation.findNavController(binding.getRoot())
-        .navigate(QuestionFragmentDirections.openQuestion().setQuestionId(UUID.fromString(id)));
+        .navigate(QuestionFragmentDirections.openQuestion().setQuestionId(id));
   }
 
 }

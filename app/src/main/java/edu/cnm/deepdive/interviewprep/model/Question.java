@@ -2,11 +2,12 @@ package edu.cnm.deepdive.interviewprep.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.UUID;
 
-public class Question {
+public class Question implements Comparable<Question> {
 
   @Expose
-  private String id;
+  private UUID id;
 
   @Expose
   private String question;
@@ -17,11 +18,11 @@ public class Question {
   @Expose
   private String source;
 
-  public String getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -47,5 +48,10 @@ public class Question {
 
   public void setSource(String source) {
     this.source = source;
+  }
+
+  @Override
+  public int compareTo(Question other) {
+    return this.question.compareToIgnoreCase(other.question);
   }
 }

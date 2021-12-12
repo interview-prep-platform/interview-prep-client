@@ -54,6 +54,7 @@
       android:padding="@dimen/half_dynamic_spacing"
       android:src="@drawable/ic_close_black_24dp"
       app:tint="@color/cancel"
+      android:background="?android:selectableItemBackgroundBorderless"
       app:layout_constraintTop_toTopOf="@id/question_layout"
       app:layout_constraintBottom_toBottomOf="@id/question_layout"
       app:layout_constraintEnd_toEndOf="parent"

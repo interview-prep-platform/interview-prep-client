@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import edu.cnm.deepdive.interviewprep.adapter.QuestionItemAdapter.Holder;
 import edu.cnm.deepdive.interviewprep.databinding.ItemQuestionBinding;
 import edu.cnm.deepdive.interviewprep.model.Question;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 public class QuestionItemAdapter extends Adapter<Holder> {
 
@@ -31,8 +34,8 @@ public class QuestionItemAdapter extends Adapter<Holder> {
     this.context = context;
     this.onQuestionEditHelper = onQuestionEditHelper;
     this.onQuestionDeleteHelper = onQuestionDeleteHelper;
-
     this.questions = questions;
+    this.questions.sort(null);
     this.onQuestionClickHelper = onQuestionClickHelper;
     inflater = LayoutInflater.from(context);
 
@@ -67,21 +70,22 @@ public class QuestionItemAdapter extends Adapter<Holder> {
     private void bind(int position) {
       Question question = questions.get(position);
       binding.question.setText(question.getQuestion());
+      UUID id = question.getId();
       binding.questionEdit.setOnClickListener(
-          (v) -> onQuestionEditHelper.onQuestionClick(question.getId(), v));
+          (v) -> onQuestionEditHelper.onQuestionClick(id, v));
       binding.questionDelete.setOnClickListener(
-          (v) -> onQuestionDeleteHelper.onQuestionClick(question, v));
+          (v) -> onQuestionDeleteHelper.onQuestionClick(id, v));
 
       binding.getRoot()
           .setOnClickListener(
-              (view) -> onQuestionClickHelper.onQuestionClick(question.getId(), view));
+              (view) -> onQuestionClickHelper.onQuestionClick(id, view));
     }
 
   }
 
   public interface OnQuestionClickHelper {
 
-    void onQuestionClick(String id, View view);
+    void onQuestionClick(UUID id, View view);
   }
 
   /**
@@ -89,7 +93,7 @@ public class QuestionItemAdapter extends Adapter<Holder> {
    */
   public interface OnQuestionEditHelper {
 
-    void onQuestionClick(String id, View view);
+    void onQuestionClick(UUID id, View view);
   }
 
   /**
@@ -97,7 +101,7 @@ public class QuestionItemAdapter extends Adapter<Holder> {
    */
   public interface OnQuestionDeleteHelper {
 
-    void onQuestionClick(Question question, View view);
+    void onQuestionClick(UUID id, View view);
   }
 
 }
