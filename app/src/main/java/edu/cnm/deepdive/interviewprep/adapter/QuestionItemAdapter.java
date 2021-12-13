@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import edu.cnm.deepdive.interviewprep.adapter.QuestionItemAdapter.Holder;
 import edu.cnm.deepdive.interviewprep.databinding.ItemQuestionBinding;
 import edu.cnm.deepdive.interviewprep.model.Question;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Populates {@link Question}s into a RecyclerView as specified by the accompanying item layout.
+ */
 public class QuestionItemAdapter extends Adapter<Holder> {
 
 
@@ -25,7 +26,19 @@ public class QuestionItemAdapter extends Adapter<Holder> {
   private final OnQuestionEditHelper onQuestionEditHelper;
   private final OnQuestionDeleteHelper onQuestionDeleteHelper;
 
-
+  /**
+   * Class constructor.  Initializes local variables.
+   *
+   * @param context                The context.
+   * @param questions              A list of {@link Question}s to be populated into the
+   *                               RecyclerView.
+   * @param onQuestionEditHelper   A helper class object to aid in editing a {@link Question}
+   *                               object.
+   * @param onQuestionDeleteHelper A helper class object to aid in deleting a {@link Question}
+   *                               object.
+   * @param onQuestionClickHelper  A helper class object to aid in going to a particular {@link
+   *                               Question} details object.
+   */
   public QuestionItemAdapter(Context context,
       List<Question> questions,
       OnQuestionEditHelper onQuestionEditHelper,
@@ -58,6 +71,10 @@ public class QuestionItemAdapter extends Adapter<Holder> {
     return questions.size();
   }
 
+  /**
+   * A helper class that binds each {@link Question} to a particular position in the RecyclerView.
+   */
+
   class Holder extends ViewHolder {
 
     private final ItemQuestionBinding binding;
@@ -82,6 +99,10 @@ public class QuestionItemAdapter extends Adapter<Holder> {
     }
 
   }
+
+  /**
+   * A helper class object to aid in going to a particular {@link Question} details object.
+   */
 
   public interface OnQuestionClickHelper {
 

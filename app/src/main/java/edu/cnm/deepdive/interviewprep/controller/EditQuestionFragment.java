@@ -15,6 +15,12 @@ import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 import java.util.UUID;
 
+
+/**
+ * Implements logic to edit a question.
+ */
+
+
 public class EditQuestionFragment extends BottomSheetDialogFragment implements TextWatcher {
 
   private FragmentEditQuestionBinding binding;
@@ -22,6 +28,12 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
   private UUID questionId;
   private Question question;
 
+  /**
+   * Overrides the onCreateView method in Fragment.  Initially gets QuestionId argument from the
+   * Question Fragment.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -29,6 +41,15 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
     questionId = args.getQuestionId();
   }
 
+  /**
+   * Overrides the onCreateView method in Fragment. Inflates (sets up and displays) the layout as
+   * specified in fragment_edit_question.xml. Additionally sets up textChangeListeners &
+   * onClickListeners that enable users to edit a question.
+   *
+   * @param savedInstanceState a {@link Bundle}.
+   * @param container          a {@link ViewGroup}.
+   * @param inflater           a {@link LayoutInflater}.
+   */
   @Override
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,14 +59,28 @@ public class EditQuestionFragment extends BottomSheetDialogFragment implements T
     binding.source.addTextChangedListener(this);
     binding.cancel.setOnClickListener((v) -> dismiss());
     binding.save.setOnClickListener((v) -> {
+      question = new Question();
       question.setQuestion(binding.question.getText().toString().trim());
       question.setAnswer(binding.answer.getText().toString().trim());
       question.setSource(binding.source.getText().toString().trim());
-      viewModel.createQuestion(question);
+      if (questionId != null) {
+        question.setId(questionId);
+        viewModel.updateQuestion(question);
+      } else {
+        viewModel.createQuestion(question);
+      }
       dismiss();
     });
     return binding.getRoot();
   }
+
+  /**
+   * Overrides the onViewCreated method in Fragment.  Specifically, interacts with the {@link
+   * QuestionViewModel} to get a question from the server to edit as specified by the questionId.
+   *
+   * @param view               a {@link View}.
+   * @param savedInstanceState a {@link Bundle}.
+   */
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
