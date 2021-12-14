@@ -16,7 +16,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/question_edit"
     tools:text="This is a Question"/>
   <ImageButton
     android:id="@+id/question_edit"
