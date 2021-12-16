@@ -53,6 +53,21 @@ public class QuizPageFragment extends Fragment {
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
+          if (question.getUserAnswer() != null) {
+            Toast.makeText(
+                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
+            binding.userAnswerText.setText(question.getUserAnswer());
+            binding.userEditAnswerText.setVisibility(View.GONE);
+            binding.submit.setVisibility(View.GONE);
+          }
+          else {
+            Toast.makeText(
+                getContext(), "here", Toast.LENGTH_SHORT).show();
+            binding.userAnswerText.setVisibility(View.GONE);
+            binding.submit.setVisibility(View.GONE);
+            binding.userEditAnswerText.setVisibility(View.VISIBLE);
+            binding.submit.setVisibility(View.VISIBLE);
+          }
         });
     binding.answerText.setVisibility(View.GONE);
     binding.showAnswer.setText(R.string.show_answer_button);
@@ -73,9 +88,13 @@ public class QuizPageFragment extends Fragment {
       public void onClick(View view) {
         binding.userAnswerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
         questionViewModel.getQuestion().observe(getViewLifecycleOwner(), (q) -> {
-          q.setUserAnswer(binding.userAnswerText.getText().toString().trim());
+          binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
+          q.setUserAnswer(binding.userEditAnswerText.getText().toString().trim());
           questionViewModel//can only observe on live data
               .updateQuestion(q);
+          binding.userEditAnswerText.setVisibility(View.GONE);
+          binding.submit.setVisibility(View.GONE);
+          binding.userAnswerText.setVisibility(View.VISIBLE);
         });
         Toast.makeText(
             getContext(), "Your Answer has been Submitted", Toast.LENGTH_SHORT).show();
