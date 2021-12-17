@@ -61,8 +61,8 @@ public class QuizPageFragment extends Fragment {
             binding.submit.setVisibility(View.GONE);
           }
           else {
-            Toast.makeText(
-                getContext(), "here", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(
+//                getContext(), "here", Toast.LENGTH_SHORT).show();
             binding.userAnswerText.setVisibility(View.GONE);
             binding.submit.setVisibility(View.GONE);
             binding.userEditAnswerText.setVisibility(View.VISIBLE);
