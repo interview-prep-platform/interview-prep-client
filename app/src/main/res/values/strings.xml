@@ -25,4 +25,10 @@
   <string name="source_hint">Source</string>
   <string name="adds_a_new_question_label">Adds a new Question</string>
   <string name="new_quiz">New Quiz</string>
+  <string name="user_answer">My Answer:</string>
+  <string name="answer">Answer:</string>
+  <string name="submit">Submit</string>
+  <string name="show_answer">Show Answer</string>
+  <string name="show_answer_button">Show Answer</string>
+  <string name="hide_answer_button">Hide Answer</string>
 </resources>
