@@ -54,8 +54,8 @@ public class QuizPageFragment extends Fragment {
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
           if (question.getUserAnswer() != null) {
-            Toast.makeText(
-                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(
+//                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
             binding.userAnswerText.setText(question.getUserAnswer());
             binding.userEditAnswerText.setVisibility(View.GONE);
             binding.submit.setVisibility(View.GONE);
