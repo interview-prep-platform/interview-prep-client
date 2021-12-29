@@ -3,6 +3,7 @@ package edu.cnm.deepdive.interviewprep.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.interviewprep.BuildConfig;
+import edu.cnm.deepdive.interviewprep.model.History;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -91,6 +92,27 @@ public interface WebServiceProxy {
   @DELETE("questions/{questionId}")
   Completable deleteQuestion(@Path("questionId") UUID questionId,
       @Header("Authorization") String bearerToken);
+
+
+  @GET("answers")
+  Single<List<History>> getHistories(@Header("Authorization") String bearerToken);
+
+  @GET("answers/{questionId}")
+  Single<History> getHistory(@Path("questionId") UUID questionId,
+      @Header("Authorization") String bearerToken);
+
+  @PUT("answers/{historyId}")
+  Single<History> updateHistory(@Path("historyId") UUID historyId, @Body History history,
+      @Header("Authorization") String bearerToken);
+
+  @POST("answers")
+  Single<History> createHistory(@Body History history,
+      @Header("Authorization") String bearerToken);
+
+  @DELETE("answers/{historyId}")
+  Completable deleteHistory(@Path("historyId") UUID historyId,
+      @Header("Authorization") String bearerToken);
+
 
   /**
    * Returns a single instance of the class instance holder.
