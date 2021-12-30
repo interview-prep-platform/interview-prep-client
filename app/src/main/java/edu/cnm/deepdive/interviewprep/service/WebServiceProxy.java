@@ -22,6 +22,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * This class lists REST endpoints that are used to access to the server.
@@ -37,6 +38,9 @@ public interface WebServiceProxy {
    */
   @GET("questions")
   Single<List<Question>> getQuestions(@Header("Authorization") String bearerToken);
+
+  @GET("questions")
+  Single<List<Question>> getAllQuestionsWithOrWithoutAnswers(@Query("answered") boolean answered, @Header("Authorization") String bearerToken);
 
   /**
    * This method defines the behavior of a GET request to the URL /interviewprep/questions/random.
@@ -94,23 +98,15 @@ public interface WebServiceProxy {
       @Header("Authorization") String bearerToken);
 
 
-  @GET("answers")
-  Single<List<History>> getHistories(@Header("Authorization") String bearerToken);
+  @GET("questions/{questionId}/answers")
+  Single<List<History>> getHistories(@Path("questionId") UUID questionId, @Header("Authorization") String bearerToken);
 
-  @GET("answers/{questionId}")
-  Single<History> getHistory(@Path("questionId") UUID questionId,
+  @POST("questions/{questionId}/answers")
+  Single<History> createHistory(@Body History history, @Path("questionId") UUID questionId,
       @Header("Authorization") String bearerToken);
 
-  @PUT("answers/{historyId}")
-  Single<History> updateHistory(@Path("historyId") UUID historyId, @Body History history,
-      @Header("Authorization") String bearerToken);
-
-  @POST("answers")
-  Single<History> createHistory(@Body History history,
-      @Header("Authorization") String bearerToken);
-
-  @DELETE("answers/{historyId}")
-  Completable deleteHistory(@Path("historyId") UUID historyId,
+  @DELETE("questions/{questionId}/answers/{answerId}")
+  Completable deleteHistory(@Path("questionId") UUID questionId, @Path("answerId") UUID answerId,
       @Header("Authorization") String bearerToken);
 
 

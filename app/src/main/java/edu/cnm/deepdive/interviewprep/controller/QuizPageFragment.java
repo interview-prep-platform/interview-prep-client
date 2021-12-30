@@ -38,37 +38,11 @@ public class QuizPageFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     binding = FragmentQuizPageBinding.inflate(getLayoutInflater(), container, false);
-    return binding.getRoot();
-  }
-
-  @Override
-  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-    questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
-    questionViewModel.refreshQuestion(questionId);
-    questionViewModel//can only observe on live data
-        .getQuestion()
-        .observe(getViewLifecycleOwner(), (question) -> {
-          Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
-          binding.questionText.setText(question.getQuestion());
-          binding.answerText.setText(question.getAnswer());
-          binding.sourceText.setText(question.getSource());
-          if (question.getUserAnswer() != null) {
-//            Toast.makeText(
-//                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
-            binding.userAnswerText.setText(question.getUserAnswer());
-            binding.userEditAnswerText.setVisibility(View.GONE);
-            binding.submit.setVisibility(View.GONE);
-          }
-          else {
-//            Toast.makeText(
-//                getContext(), "here", Toast.LENGTH_SHORT).show();
-            binding.userAnswerText.setVisibility(View.GONE);
-            binding.submit.setVisibility(View.GONE);
-            binding.userEditAnswerText.setVisibility(View.VISIBLE);
-            binding.submit.setVisibility(View.VISIBLE);
-          }
-        });
+    binding.questionText.setText("");
+    binding.answerText.setText("");
+    binding.sourceText.setText("");
+    binding.userAnswerText.setText("");
+    binding.userEditAnswerText.setText("");
     binding.answerText.setVisibility(View.GONE);
     binding.showAnswer.setText(R.string.show_answer_button);
     binding.showAnswer.setOnClickListener(new OnClickListener() {
@@ -100,10 +74,43 @@ public class QuizPageFragment extends Fragment {
             getContext(), "Your Answer has been Submitted", Toast.LENGTH_SHORT).show();
       }
     });
+    return binding.getRoot();
   }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    questionViewModel.refreshQuestion(questionId);
+    questionViewModel//can only observe on live data
+        .getQuestion()
+        .observe(getViewLifecycleOwner(), (question) -> {
+          Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
+          binding.questionText.setText(question.getQuestion());
+          binding.answerText.setText(question.getAnswer());
+          binding.sourceText.setText(question.getSource());
+          if (question.getUserAnswer() != null) {
+//            Toast.makeText(
+//                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
+//            binding.userAnswerText.setText(question.getUserAnswer());
+            binding.userEditAnswerText.setVisibility(View.GONE);
+            binding.submit.setVisibility(View.GONE);
+          } else {
+//            Toast.makeText(
+//                getContext(), "here", Toast.LENGTH_SHORT).show();
+            binding.userAnswerText.setVisibility(View.GONE);
+            binding.submit.setVisibility(View.GONE);
+            binding.userEditAnswerText.setVisibility(View.VISIBLE);
+            binding.submit.setVisibility(View.VISIBLE);
+          }
+        });
+
+  }
+
 
   @Override
   public void onDestroyView() {
     super.onDestroyView();
   }
+
 }
