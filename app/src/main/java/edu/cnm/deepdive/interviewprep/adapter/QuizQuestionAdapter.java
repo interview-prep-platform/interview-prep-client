@@ -1,10 +1,7 @@
 package edu.cnm.deepdive.interviewprep.adapter;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import edu.cnm.deepdive.interviewprep.controller.QuizPageFragment;
 import edu.cnm.deepdive.interviewprep.model.Question;
@@ -23,11 +20,7 @@ public class QuizQuestionAdapter extends FragmentStateAdapter {
   @NonNull
   @Override
   public Fragment createFragment(int position) {
-    Fragment fragment = new QuizPageFragment();
-    Bundle args = new Bundle();
-    args.putSerializable("question_id", questions.get(position).getId());
-    fragment.setArguments(args);
-    return fragment;
+    return new QuizPageFragment();
   }
 
   @Override

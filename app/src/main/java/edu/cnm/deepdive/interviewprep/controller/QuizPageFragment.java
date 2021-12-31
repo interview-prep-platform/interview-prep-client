@@ -20,18 +20,8 @@ import java.util.UUID;
 
 public class QuizPageFragment extends Fragment {
 
-  private UUID questionId;
   private FragmentQuizPageBinding binding;
   private QuestionViewModel questionViewModel;
-
-
-  @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    QuizPageFragmentArgs args = QuizPageFragmentArgs.fromBundle(getArguments());
-    questionId = args.getQuestionId();
-    Log.d(getClass().getSimpleName(), questionId.toString());
-  }
 
   @Nullable
   @Override
@@ -81,7 +71,6 @@ public class QuizPageFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
-    questionViewModel.refreshQuestion(questionId);
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
