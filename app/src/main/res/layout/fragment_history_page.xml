@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <!--  Question Label-->
+  <TextView
+    android:id="@+id/question_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    android:text="Question:"
+    android:textStyle="bold"
+    android:background="@color/green"
+    app:layout_constraintBottom_toTopOf="@id/question_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="Question:"
+    />
+
+  <!--Question Text-->
+  <TextView
+    android:id="@+id/question_text"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toTopOf="@id/user_answer_label"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/question_label"
+    tools:text="question 1"/>
+
+  <!--User Answer Label-->
+  <TextView
+    android:id="@+id/user_answer_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    android:text="@string/user_answer"
+    android:textStyle="bold"
+    android:background="@color/purple_500"
+    app:layout_constraintBottom_toTopOf="@id/user_edit_answer_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/question_text"
+    tools:text="My Answer:"
+    />
+
+  <!--  User Edit Answer Text-->
+  <EditText
+    android:id="@+id/user_edit_answer_text"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    android:background="#FFFFFF"
+    app:layout_constraintBottom_toTopOf="@id/user_answer_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/user_answer_label"
+    tools:text="my answer"
+    android:inputType="text"
+    android:autofillHints="Enter my Answer"
+    tools:ignore="LabelFor"/>
+
+<!--  User Answer Text View-->
+  <TextView
+    android:id="@+id/user_answer_text"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toTopOf="@id/submit"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/user_edit_answer_text"
+    tools:text="my answer"/>
+
+  <!--  Submit Button-->
+  <Button
+    android:id="@+id/submit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/submit"
+    android:textColor="@color/black"
+    android:drawableLeft="@android:drawable/ic_menu_send"
+    android:background="@color/yellow"
+    android:backgroundTint="@color/yellow"
+    app:layout_constraintTop_toBottomOf="@id/user_answer_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/answer_label"
+    android:contentDescription="@string/save_label"/>
+
+
+  <!--Answer Label-->
+  <TextView
+    android:id="@+id/answer_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    android:background="@color/yellow"
+    android:text="@string/answer"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toTopOf="@id/answer_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/submit"
+    tools:text="Answer:"
+    />
+
+  <!--  Answer Text-->
+  <TextView
+    android:id="@+id/answer_text"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toTopOf="@id/show_answer"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/answer_label"
+    tools:text="answer 1"
+    />
+
+
+  <!--  Show Answer Button-->
+  <Button
+    android:id="@+id/show_answer"
+    android:theme="@style/Button.color"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:text="@string/show_answer"
+    android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24"
+    android:textColor="@color/black"
+    android:background="@color/yellow"
+    app:layout_constraintTop_toBottomOf="@id/answer_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/source_label"
+    android:contentDescription="@string/save_label"/>
+
+  <!--  Source Label-->
+  <TextView
+    android:id="@+id/source_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    android:background="@color/red"
+    android:text="Source:"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toTopOf="@id/source_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/show_answer"
+    tools:text="Source:"
+    />
+
+  <!--  Source Text-->
+  <TextView
+    android:id="@+id/source_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    android:maxLines="2"
+    android:ellipsize="end"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/source_label"
+    tools:text="www.source.com"
+    />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
