@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizPageBinding;
-import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
-import java.util.UUID;
 
 public class QuizPageFragment extends Fragment {
 
