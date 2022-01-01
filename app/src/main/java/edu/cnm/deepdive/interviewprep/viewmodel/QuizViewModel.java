@@ -8,6 +8,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import edu.cnm.deepdive.interviewprep.model.History;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.QuizRepository;
 import io.reactivex.disposables.CompositeDisposable;
@@ -22,10 +23,9 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
   private final QuizRepository repository;
   private final MutableLiveData<List<Question>> questions;
   private final MutableLiveData<Question> question;
+  private final MutableLiveData<History> answer;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-  private List<LiveData<Question>> quizQuestions;
-
 
   /**
    * Class constructor.  Instantiates local class variables. Additionally, gets a question from the
@@ -38,6 +38,7 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
     repository = new QuizRepository();
     questions = new MutableLiveData<>();
     question = new MutableLiveData<>();
+    answer = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     refreshQuestion();
@@ -59,6 +60,10 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
    */
   public LiveData<Question> getQuestion() {
     return question;
+  }
+
+  public LiveData<History> getAnswer() {
+    return answer;
   }
 
   private LiveData<Throwable> getThrowable() {
@@ -91,11 +96,4 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
     this.throwable.postValue(throwable);
   }
 
-//  public List<LiveData<Question>> startQuiz() {
-//    for (int i = 0; i < 3; i++) {
-//      quizQuestions.add(getQuestion());
-//
-//    }
-//    return quizQuestions;
-//  }
 }

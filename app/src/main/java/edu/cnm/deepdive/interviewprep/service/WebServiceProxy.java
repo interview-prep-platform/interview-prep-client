@@ -3,6 +3,7 @@ package edu.cnm.deepdive.interviewprep.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.interviewprep.BuildConfig;
+import edu.cnm.deepdive.interviewprep.model.History;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -21,6 +22,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * This class lists REST endpoints that are used to access to the server.
@@ -36,6 +38,9 @@ public interface WebServiceProxy {
    */
   @GET("questions")
   Single<List<Question>> getQuestions(@Header("Authorization") String bearerToken);
+
+  @GET("questions")
+  Single<List<Question>> getAllQuestionsWithOrWithoutAnswers(@Query("answered") boolean answered, @Header("Authorization") String bearerToken);
 
   /**
    * This method defines the behavior of a GET request to the URL /interviewprep/questions/random.
@@ -91,6 +96,19 @@ public interface WebServiceProxy {
   @DELETE("questions/{questionId}")
   Completable deleteQuestion(@Path("questionId") UUID questionId,
       @Header("Authorization") String bearerToken);
+
+
+  @GET("questions/{questionId}/answers")
+  Single<List<History>> getHistories(@Path("questionId") UUID questionId, @Header("Authorization") String bearerToken);
+
+  @POST("questions/{questionId}/answers")
+  Single<History> createHistory(@Body History history, @Path("questionId") UUID questionId,
+      @Header("Authorization") String bearerToken);
+
+  @DELETE("questions/{questionId}/answers/{answerId}")
+  Completable deleteHistory(@Path("questionId") UUID questionId, @Path("answerId") UUID answerId,
+      @Header("Authorization") String bearerToken);
+
 
   /**
    * Returns a single instance of the class instance holder.
