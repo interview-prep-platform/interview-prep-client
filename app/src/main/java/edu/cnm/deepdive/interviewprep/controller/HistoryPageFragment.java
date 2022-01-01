@@ -15,12 +15,16 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentHistoryPageBinding;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizPageBinding;
+import edu.cnm.deepdive.interviewprep.model.History;
+import edu.cnm.deepdive.interviewprep.viewmodel.HistoryViewModel;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 
 public class HistoryPageFragment extends Fragment {
 
   private FragmentHistoryPageBinding binding;
   private QuestionViewModel questionViewModel;
+  private HistoryViewModel historyViewModel;
+
 
   @Nullable
   @Override
@@ -52,9 +56,13 @@ public class HistoryPageFragment extends Fragment {
         binding.userAnswerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
         questionViewModel.getQuestion().observe(getViewLifecycleOwner(), (q) -> {
           binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
-          q.setUserAnswer(binding.userEditAnswerText.getText().toString().trim());
-          questionViewModel//can only observe on live data
-              .updateQuestion(q);
+          //q.setAnswer(binding.userEditAnswerText.getText().toString().trim());
+          //questionViewModel//can only observe on live data
+          //    .updateQuestion(q);
+          History history = new History();
+          history.setAnswer(binding.userEditAnswerText.getText().toString().trim());
+          historyViewModel
+              .createHistory(history, q);
           binding.userEditAnswerText.setVisibility(View.GONE);
           binding.submit.setVisibility(View.GONE);
           binding.userAnswerText.setVisibility(View.VISIBLE);
@@ -77,20 +85,20 @@ public class HistoryPageFragment extends Fragment {
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
-          if (question.getUserAnswer() != null) {
+          //if (history.getAnswer() != null) {
 //            Toast.makeText(
 //                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
 //            binding.userAnswerText.setText(question.getUserAnswer());
-            binding.userEditAnswerText.setVisibility(View.GONE);
-            binding.submit.setVisibility(View.GONE);
-          } else {
+            //binding.userEditAnswerText.setVisibility(View.GONE);
+            //binding.submit.setVisibility(View.GONE);
+          //} else {
 //            Toast.makeText(
 //                getContext(), "here", Toast.LENGTH_SHORT).show();
             binding.userAnswerText.setVisibility(View.GONE);
             binding.submit.setVisibility(View.GONE);
             binding.userEditAnswerText.setVisibility(View.VISIBLE);
             binding.submit.setVisibility(View.VISIBLE);
-          }
+          //}
         });
 
   }
