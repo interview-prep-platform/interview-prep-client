@@ -57,6 +57,7 @@ public class HistoryPageFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
     historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
+    //questionViewModel.refreshHistory();
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {

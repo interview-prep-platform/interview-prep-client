@@ -77,6 +77,7 @@ public class QuizPageFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
     historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
+    //questionViewModel.refreshQuestions();
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {

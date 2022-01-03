@@ -38,6 +38,13 @@ public class QuestionRepository {
         .subscribeOn(Schedulers.io());
   }
 
+  public Single<List<Question>> getHistory() {
+    return signInRepository
+        .refreshBearerToken()
+        .flatMap(bearerToken -> proxy.getAllQuestionsWithOrWithoutAnswers(true, bearerToken))
+        .subscribeOn(Schedulers.io());
+  }
+
   /**
    * Gets a single {@link Question} from the server.
    * @param questionId A question id in the form of a universally unique identifier.

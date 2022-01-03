@@ -41,6 +41,7 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     refreshQuestions();
+    //refreshHistory();
   }
 
   /**
@@ -73,6 +74,17 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     pending.add(
         repository
             .getQuestions()
+            .subscribe(
+                questions::postValue,
+                this::postThrowable
+            )
+    );
+  }
+
+  public void refreshHistory() {
+    pending.add(
+        repository
+            .getHistory()
             .subscribe(
                 questions::postValue,
                 this::postThrowable

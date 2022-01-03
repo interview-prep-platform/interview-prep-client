@@ -60,6 +60,7 @@ public class QuestionFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    //questionViewModel.refreshQuestions();
     questionViewModel
         .getQuestions()
         .observe(getViewLifecycleOwner(), (questions) -> {
