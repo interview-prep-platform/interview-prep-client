@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.interviewprep.viewmodel;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,6 +10,8 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.preference.PreferenceManager;
+import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,7 +29,7 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
   private final MutableLiveData<Question> question;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-
+  private int quizLengthPref;
 
   /**
    * Class constructor.  Instantiates local class variables. Additionally, gets all the questions
@@ -40,8 +44,14 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     question = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
-    refreshQuestions();
+    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(application);
+    Resources resources = application.getResources();
+    String quizLengthPrefKey = resources.getString(R.string.quiz_length_pref_key);
+    int quizLengthPrefDefault = resources.getInteger(R.integer.quiz_length_pref_default);
+    quizLengthPref = preferences.getInt(quizLengthPrefKey, quizLengthPrefDefault);
+    //refreshQuestions();
     //refreshHistory();
+    refreshRandomQuestions();
   }
 
   /**
@@ -74,6 +84,17 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     pending.add(
         repository
             .getQuestions()
+            .subscribe(
+                questions::postValue,
+                this::postThrowable
+            )
+    );
+  }
+
+  public void refreshRandomQuestions() {
+    pending.add(
+        repository
+            .getRandomQuestions(quizLengthPref)
             .subscribe(
                 questions::postValue,
                 this::postThrowable

@@ -38,6 +38,13 @@ public class QuestionRepository {
         .subscribeOn(Schedulers.io());
   }
 
+  public Single<List<Question>> getRandomQuestions(int quizLength) {
+    return signInRepository
+        .refreshBearerToken()
+        .flatMap(bearerToken -> proxy.getRandomQuestions(quizLength, bearerToken))
+        .subscribeOn(Schedulers.io());
+  }
+
   public Single<List<Question>> getHistory() {
     return signInRepository
         .refreshBearerToken()

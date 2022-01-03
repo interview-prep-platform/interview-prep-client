@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.AppBarConfiguration.Builder;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
+import edu.cnm.deepdive.interviewprep.MobileNavigationDirections;
 import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.ActivityMainBinding;
 import edu.cnm.deepdive.interviewprep.viewmodel.LoginViewModel;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
   private AppBarConfiguration appBarConfiguration;
   private ActivityMainBinding binding;
   private LoginViewModel loginViewModel;
+  private NavController navController;
 
   /**
    * Overrides the onCreate method in AppCompatActivity.  Instantiates local variables.
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         R.id.nav_question, R.id.nav_quiz, R.id.nav_history)
         .setOpenableLayout(drawer)
         .build();
-    NavController navController = Navigation.findNavController(this,
+    navController = Navigation.findNavController(this,
         R.id.nav_host_fragment_content_main);
     NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
     boolean handled;
     if (item.getItemId() == R.id.sign_out) {
       loginViewModel.signOut();
+      handled = true;
+    } else if (item.getItemId() == R.id.action_settings) {
+      navController.navigate(MobileNavigationDirections.openSettings());
       handled = true;
     } else {
       handled = super.onOptionsItemSelected(item);

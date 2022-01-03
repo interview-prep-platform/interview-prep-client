@@ -5,6 +5,15 @@
   android:id="@+id/mobile_navigation"
   app:startDestination="@+id/nav_question">
 
+  <action
+    android:id="@+id/open_settings"
+    app:destination="@id/nav_settings"/>
+
+  <fragment
+    android:id="@+id/nav_settings"
+    android:label="@string/action_settings"
+    android:name="edu.cnm.deepdive.interviewprep.controller.SettingsFragment"/>
+
   <fragment
     android:id="@+id/nav_question"
     android:label="@string/menu_question"

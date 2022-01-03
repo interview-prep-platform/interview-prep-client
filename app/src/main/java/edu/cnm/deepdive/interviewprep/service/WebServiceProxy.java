@@ -50,7 +50,7 @@ public interface WebServiceProxy {
    * @return A random {@link Question} in the form of a ReactiveX {@link Single}.
    */
   @GET("questions/random")
-  //Single<Question> getRandomQuestion(@Header("Authorization") String bearerToken);
+  Single<Question> getRandomQuestion(@Header("Authorization") String bearerToken);
   Single<List<Question>> getRandomQuestions(@Query("quizlength") int quizlength,@Header("Authorization") String bearerToken);
 
   /**
