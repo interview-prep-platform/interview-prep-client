@@ -94,20 +94,26 @@ public class QuizPageFragment extends Fragment {
           //} else {
 //            Toast.makeText(
 //                getContext(), "here", Toast.LENGTH_SHORT).show();
-          historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
-            Log.d(getClass().getSimpleName(), histories.toString());
-            if (histories != null && !histories.isEmpty()) {
-              History history = histories.get(0);
-              binding.userAnswerText.setText(history.getAnswer());
-              binding.userAnswerText.setVisibility(View.VISIBLE);
-            }
-          });
-            binding.userAnswerText.setVisibility(View.GONE);
-            binding.submit.setVisibility(View.GONE);
-            binding.userEditAnswerText.setVisibility(View.VISIBLE);
-            binding.submit.setVisibility(View.VISIBLE);
+
+
          // }
         });
+    historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
+      Log.d(getClass().getSimpleName(), histories.toString());
+      //historyViewModel.refreshHistories(question.getId());
+      if (histories != null && !histories.isEmpty()) {
+        History history = histories.get(0);
+        binding.userAnswerText.setText(history.getAnswer());
+        binding.userAnswerText.setVisibility(View.VISIBLE);
+        binding.submit.setVisibility(View.GONE);
+        binding.userEditAnswerText.setVisibility(View.GONE);
+      } else {
+        binding.userEditAnswerText.setVisibility(View.VISIBLE);
+        binding.userAnswerText.setVisibility(View.GONE);
+        binding.userEditAnswerText.setVisibility(View.VISIBLE);
+        binding.submit.setVisibility(View.VISIBLE);
+      }
+    });
 
   }
 

@@ -35,7 +35,6 @@ public class HistoryPageFragment extends Fragment {
     binding.answerText.setText("");
     binding.sourceText.setText("");
     binding.userAnswerText.setText("");
-    binding.userEditAnswerText.setText("");
     binding.answerText.setVisibility(View.GONE);
     binding.showAnswer.setText(R.string.show_answer_button);
     binding.showAnswer.setOnClickListener(new OnClickListener() {
@@ -48,27 +47,6 @@ public class HistoryPageFragment extends Fragment {
           binding.showAnswer.setText(R.string.show_answer_button);
           binding.answerText.setVisibility(View.GONE);
         }
-      }
-    });
-    binding.submit.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        binding.userAnswerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
-        questionViewModel.getQuestion().observe(getViewLifecycleOwner(), (q) -> {
-          binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
-          //q.setAnswer(binding.userEditAnswerText.getText().toString().trim());
-          //questionViewModel//can only observe on live data
-          //    .updateQuestion(q);
-          History history = new History();
-          history.setAnswer(binding.userEditAnswerText.getText().toString().trim());
-          historyViewModel
-              .createHistory(history, q);
-          binding.userEditAnswerText.setVisibility(View.GONE);
-          binding.submit.setVisibility(View.GONE);
-          binding.userAnswerText.setVisibility(View.VISIBLE);
-        });
-        Toast.makeText(
-            getContext(), "Your Answer has been Submitted", Toast.LENGTH_SHORT).show();
       }
     });
     return binding.getRoot();
@@ -97,9 +75,6 @@ public class HistoryPageFragment extends Fragment {
 //            Toast.makeText(
 //                getContext(), "here", Toast.LENGTH_SHORT).show();
             binding.userAnswerText.setVisibility(View.GONE);
-            binding.submit.setVisibility(View.GONE);
-            binding.userEditAnswerText.setVisibility(View.VISIBLE);
-            binding.submit.setVisibility(View.VISIBLE);
           //}
         });
         historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
