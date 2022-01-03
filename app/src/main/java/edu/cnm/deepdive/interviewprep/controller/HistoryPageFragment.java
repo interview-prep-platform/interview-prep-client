@@ -78,10 +78,12 @@ public class HistoryPageFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
           Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
+          historyViewModel.refreshHistories(question.getId());
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
@@ -100,7 +102,17 @@ public class HistoryPageFragment extends Fragment {
             binding.submit.setVisibility(View.VISIBLE);
           //}
         });
-
+        historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
+          Log.d(getClass().getSimpleName(), histories.toString());
+          if (histories != null && !histories.isEmpty()) {
+             History history = histories.get(0);
+            binding.userAnswerText.setText(history.getAnswer());
+            binding.userAnswerText.setVisibility(View.VISIBLE);
+          }
+          else {
+            binding.userAnswerText.setVisibility(View.GONE);
+          }
+        });
   }
 
 

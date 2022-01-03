@@ -11,7 +11,6 @@ import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.interviewprep.model.History;
 import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.service.HistoryRepository;
-import edu.cnm.deepdive.interviewprep.service.QuestionRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +41,6 @@ public class HistoryViewModel extends AndroidViewModel implements DefaultLifecyc
     history = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
-    refreshQuestions(history.getValue().getQuestion().getId());
   }
 
   /**
@@ -71,7 +69,7 @@ public class HistoryViewModel extends AndroidViewModel implements DefaultLifecyc
    * gets a list of all questions from the question repository. Additionally, subscribes to the
    * result and puts the result in the local variable questions.
    */
-  public void refreshQuestions(UUID questionId) {
+  public void refreshHistories(UUID questionId) {
     pending.add(
         repository
             .getHistories(questionId)
@@ -116,6 +114,7 @@ public class HistoryViewModel extends AndroidViewModel implements DefaultLifecyc
    * @param question A new {@link Question} object.
    */
   public void createHistory(History history, Question question) {
+    history.setQuestion(question);
     pending.add(
         repository
             .createHistory(history)

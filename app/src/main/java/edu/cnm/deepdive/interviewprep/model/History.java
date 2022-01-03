@@ -15,7 +15,6 @@ public class History {
   @Expose
   private String answer;
 
-  @Expose
   private Question question;
 
   /**
