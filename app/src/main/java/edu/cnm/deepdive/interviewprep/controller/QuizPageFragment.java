@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.interviewprep.controller;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +31,12 @@ public class QuizPageFragment extends Fragment {
       @Nullable Bundle savedInstanceState) {
     binding = FragmentQuizPageBinding.inflate(getLayoutInflater(), container, false);
     binding.questionText.setText("");
+    binding.questionText.setMovementMethod(new ScrollingMovementMethod());
     binding.answerText.setText("");
+    binding.answerText.setMovementMethod(new ScrollingMovementMethod());
     binding.sourceText.setText("");
     binding.userAnswerText.setText("");
+    binding.userAnswerText.setMovementMethod(new ScrollingMovementMethod());
     binding.userEditAnswerText.setText("");
     binding.answerText.setVisibility(View.GONE);
     binding.showAnswer.setText(R.string.show_answer_button);
