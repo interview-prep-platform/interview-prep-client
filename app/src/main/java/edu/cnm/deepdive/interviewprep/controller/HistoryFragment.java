@@ -12,7 +12,9 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 import edu.cnm.deepdive.interviewprep.adapter.HistoryAdapter;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentHistoryBinding;
 import edu.cnm.deepdive.interviewprep.model.Question;
+import edu.cnm.deepdive.interviewprep.viewmodel.HistoryViewModel;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
+import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 import java.util.List;
 
 /**
@@ -22,7 +24,8 @@ public class HistoryFragment extends Fragment {
 
   private final OnPageChangeCallback callback = new PageChangeCallback();
 
-  private QuestionViewModel viewModel;
+  private QuestionViewModel questionViewModel;
+  private HistoryViewModel historyViewModel;
   private FragmentHistoryBinding binding;
   private HistoryAdapter adapter;
   private List<Question> questions;
@@ -60,9 +63,10 @@ public class HistoryFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    viewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
-    viewModel.refreshHistory();
-    viewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
+    questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
+    questionViewModel.refreshHistory();
+    questionViewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
       this.questions = questions;
       adapter = new HistoryAdapter(this, questions);
       binding.pager.setAdapter(adapter);
@@ -74,7 +78,9 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onPageSelected(int position) {
       super.onPageSelected(position);
-      viewModel.refreshQuestion(questions.get(position).getId());
+      Question question = questions.get(position);
+      questionViewModel.refreshQuestion(question.getId());
+      historyViewModel.refreshHistories(question.getId());
     }
 
   }
