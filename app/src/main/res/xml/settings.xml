@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <SeekBarPreference
+    android:key="@string/quiz_length_pref_key"
+    app:min="@integer/quiz_length_pref_min"
+    android:max="@integer/quiz_length_pref_max"
+    android:defaultValue="@integer/quiz_length_pref_default"
+    app:seekBarIncrement="@integer/quiz_length_pref_increment"
+    app:showSeekBarValue="true"
+    android:title="@string/quiz_length_pref_title"
+    android:icon="@drawable/ic_arrow_left_right"/>
+
+</PreferenceScreen>
