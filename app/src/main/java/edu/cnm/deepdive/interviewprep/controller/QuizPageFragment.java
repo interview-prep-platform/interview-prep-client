@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizPageBinding;
 import edu.cnm.deepdive.interviewprep.model.History;
+import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.viewmodel.HistoryViewModel;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 
@@ -24,6 +25,7 @@ public class QuizPageFragment extends Fragment {
   private FragmentQuizPageBinding binding;
   private QuestionViewModel questionViewModel;
   private HistoryViewModel historyViewModel;
+  private Question question;
 
   @Nullable
   @Override
@@ -56,19 +58,20 @@ public class QuizPageFragment extends Fragment {
       @Override
       public void onClick(View view) {
         binding.userAnswerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
-        questionViewModel.getQuestion().observe(getViewLifecycleOwner(), (q) -> {
-          binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
-          //q.setUserAnswer(binding.userEditAnswerText.getText().toString().trim());
-          //questionViewModel//can only observe on live data
-          //    .updateQuestion(q);
-          History history = new History();
-          history.setAnswer(binding.userEditAnswerText.getText().toString().trim());
-          historyViewModel
-              .createHistory(history, q);
-          binding.userEditAnswerText.setVisibility(View.GONE);
-          binding.submit.setVisibility(View.GONE);
-          binding.userAnswerText.setVisibility(View.VISIBLE);
-        });
+        binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
+        //q.setUserAnswer(binding.userEditAnswerText.getText().toString().trim());
+        //questionViewModel//can only observe on live data
+        //    .updateQuestion(q);
+        History history = new History();
+        history.setAnswer(binding.userEditAnswerText.getText().toString().trim());
+        historyViewModel
+            .createHistory(history, question);
+        binding.userEditAnswerText.setVisibility(View.GONE);
+        binding.submit.setVisibility(View.GONE);
+        binding.userAnswerText.setVisibility(View.VISIBLE);
+        //questionViewModel.getQuestion().observe(getViewLifecycleOwner(), (q) -> {
+
+        //});
         Toast.makeText(
             getContext(), "Your Answer has been Submitted", Toast.LENGTH_SHORT).show();
       }
@@ -86,7 +89,8 @@ public class QuizPageFragment extends Fragment {
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
           Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
-          historyViewModel.refreshHistories(question.getId());
+          this.question = question;
+          //historyViewModel.refreshHistories(question.getId());
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());

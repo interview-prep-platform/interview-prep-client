@@ -1,26 +1,20 @@
 package edu.cnm.deepdive.interviewprep.controller;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
-import edu.cnm.deepdive.interviewprep.R;
 import edu.cnm.deepdive.interviewprep.adapter.QuizQuestionAdapter;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizBinding;
 import edu.cnm.deepdive.interviewprep.model.Question;
+import edu.cnm.deepdive.interviewprep.viewmodel.HistoryViewModel;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
-import edu.cnm.deepdive.interviewprep.viewmodel.QuizViewModel;
 import java.util.List;
 
 /**
@@ -30,7 +24,8 @@ public class QuizFragment extends Fragment {
 
   private final OnPageChangeCallback callback = new PageChangeCallback();
 
-  private QuestionViewModel viewModel;
+  private QuestionViewModel questionViewModel;
+  private HistoryViewModel historyViewModel;
   private FragmentQuizBinding binding;
   private QuizQuestionAdapter adapter;
   private List<Question> questions;
@@ -46,6 +41,7 @@ public class QuizFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentQuizBinding.inflate(inflater, container, false);
+    binding.pager.setOffscreenPageLimit(1);
     binding.pager.registerOnPageChangeCallback(callback);
     return binding.getRoot();
   }
@@ -68,8 +64,10 @@ public class QuizFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    viewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
-    viewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
+    questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
+    questionViewModel.refreshRandomQuestions();
+    questionViewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
       this.questions = questions;
       adapter = new QuizQuestionAdapter(this, questions);
       binding.pager.setAdapter(adapter);
@@ -81,7 +79,9 @@ public class QuizFragment extends Fragment {
     @Override
     public void onPageSelected(int position) {
       super.onPageSelected(position);
-      viewModel.refreshQuestion(questions.get(position).getId());
+      Question question = questions.get(position);
+      questionViewModel.refreshQuestion(question.getId());
+      historyViewModel.refreshHistories(question.getId());
     }
 
   }

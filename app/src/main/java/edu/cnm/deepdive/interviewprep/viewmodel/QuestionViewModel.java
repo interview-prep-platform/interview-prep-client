@@ -29,7 +29,9 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
   private final MutableLiveData<Question> question;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-  private int quizLengthPref;
+  private final SharedPreferences preferences;
+  private final String quizLengthPrefKey;
+  private final int quizLengthPrefDefault;
 
   /**
    * Class constructor.  Instantiates local class variables. Additionally, gets all the questions
@@ -44,12 +46,11 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     question = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(application);
+    preferences = PreferenceManager.getDefaultSharedPreferences(application);
     Resources resources = application.getResources();
-    String quizLengthPrefKey = resources.getString(R.string.quiz_length_pref_key);
-    int quizLengthPrefDefault = resources.getInteger(R.integer.quiz_length_pref_default);
-    quizLengthPref = preferences.getInt(quizLengthPrefKey, quizLengthPrefDefault);
-    refreshQuestions();
+    quizLengthPrefKey = resources.getString(R.string.quiz_length_pref_key);
+    quizLengthPrefDefault = resources.getInteger(R.integer.quiz_length_pref_default);
+    //refreshQuestions();
     //refreshHistory();
     //refreshRandomQuestions();
   }
@@ -92,6 +93,7 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
   }
 
   public void refreshRandomQuestions() {
+    int quizLengthPref = preferences.getInt(quizLengthPrefKey, quizLengthPrefDefault);
     pending.add(
         repository
             .getRandomQuestions(quizLengthPref)

@@ -51,6 +51,8 @@ public interface WebServiceProxy {
    */
   @GET("questions/random")
   Single<Question> getRandomQuestion(@Header("Authorization") String bearerToken);
+
+  @GET("questions/random")
   Single<List<Question>> getRandomQuestions(@Query("quizlength") int quizlength,@Header("Authorization") String bearerToken);
 
   /**

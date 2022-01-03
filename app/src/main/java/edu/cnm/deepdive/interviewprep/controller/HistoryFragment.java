@@ -61,6 +61,7 @@ public class HistoryFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
+    viewModel.refreshHistory();
     viewModel.getQuestions().observe(getViewLifecycleOwner(), (questions) -> {
       this.questions = questions;
       adapter = new HistoryAdapter(this, questions);
