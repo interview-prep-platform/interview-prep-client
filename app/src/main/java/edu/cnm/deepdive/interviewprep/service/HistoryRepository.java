@@ -37,23 +37,6 @@ public class HistoryRepository {
   }
 
 
-//  public Single<History> getHistory(UUID historyId) {
-//    return signInRepository
-//        .refreshBearerToken()
-//        .flatMap((token) ->
-//            proxy.getHistory(historyId, token))
-//        .subscribeOn(Schedulers.io());
-//  }
-
-//  public Single<History> updateHistory(History history) {
-//    return signInRepository
-//        .refreshBearerToken()
-//        .flatMap((token) ->
-//            proxy.updateHistory(history.getId(),history, token))
-//        .subscribeOn(Schedulers.io());
-//
-//  }
-
   /**
    * Creates a new {@link History} in the server.
    * @param history A history object.
@@ -67,13 +50,5 @@ public class HistoryRepository {
         .subscribeOn(Schedulers.io());
 
   }
-
-//  public Completable deleteHistory(UUID historyId) {
-//    return signInRepository
-//        .refreshBearerToken()
-//        .flatMapCompletable((token) ->
-//            proxy.deleteHistory(historyId, token))
-//        .subscribeOn(Schedulers.io());
-//  }
 
 }

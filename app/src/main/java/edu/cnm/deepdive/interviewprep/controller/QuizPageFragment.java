@@ -59,9 +59,6 @@ public class QuizPageFragment extends Fragment {
       public void onClick(View view) {
         binding.userAnswerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
         binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
-        //q.setUserAnswer(binding.userEditAnswerText.getText().toString().trim());
-        //questionViewModel//can only observe on live data
-        //    .updateQuestion(q);
         History history = new History();
         history.setAnswer(binding.userEditAnswerText.getText().toString().trim());
         historyViewModel
@@ -69,9 +66,6 @@ public class QuizPageFragment extends Fragment {
         binding.userEditAnswerText.setVisibility(View.GONE);
         binding.submit.setVisibility(View.GONE);
         binding.userAnswerText.setVisibility(View.VISIBLE);
-        //questionViewModel.getQuestion().observe(getViewLifecycleOwner(), (q) -> {
-
-        //});
         Toast.makeText(
             getContext(), "Your Answer has been Submitted", Toast.LENGTH_SHORT).show();
       }
@@ -84,32 +78,17 @@ public class QuizPageFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
     historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
-    //questionViewModel.refreshQuestions();
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
           Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
           this.question = question;
-          //historyViewModel.refreshHistories(question.getId());
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
-          //if (history.getAnswer() != null) {
-//            Toast.makeText(
-//                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
-//            binding.userAnswerText.setText(question.getUserAnswer());
-            //binding.userEditAnswerText.setVisibility(View.GONE);
-            //binding.submit.setVisibility(View.GONE);
-          //} else {
-//            Toast.makeText(
-//                getContext(), "here", Toast.LENGTH_SHORT).show();
-
-
-         // }
         });
     historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
       Log.d(getClass().getSimpleName(), histories.toString());
-      //historyViewModel.refreshHistories(question.getId());
       if (histories != null && !histories.isEmpty()) {
         History history = histories.get(0);
         binding.userAnswerText.setText(history.getAnswer());
@@ -123,7 +102,6 @@ public class QuizPageFragment extends Fragment {
         binding.submit.setVisibility(View.VISIBLE);
       }
     });
-
   }
 
 

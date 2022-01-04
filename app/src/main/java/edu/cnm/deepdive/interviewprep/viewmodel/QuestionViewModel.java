@@ -50,9 +50,6 @@ public class QuestionViewModel extends AndroidViewModel implements DefaultLifecy
     Resources resources = application.getResources();
     quizLengthPrefKey = resources.getString(R.string.quiz_length_pref_key);
     quizLengthPrefDefault = resources.getInteger(R.integer.quiz_length_pref_default);
-    //refreshQuestions();
-    //refreshHistory();
-    //refreshRandomQuestions();
   }
 
   /**

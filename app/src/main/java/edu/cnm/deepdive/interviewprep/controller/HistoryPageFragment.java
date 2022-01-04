@@ -61,7 +61,6 @@ public class HistoryPageFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     questionViewModel = new ViewModelProvider(getActivity()).get(QuestionViewModel.class);
     historyViewModel = new ViewModelProvider(getActivity()).get(HistoryViewModel.class);
-    //questionViewModel.refreshHistory();
     questionViewModel//can only observe on live data
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
@@ -70,29 +69,18 @@ public class HistoryPageFragment extends Fragment {
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
-          //if (history.getAnswer() != null) {
-//            Toast.makeText(
-//                getContext(), "question.getAnswer() != null", Toast.LENGTH_SHORT).show();
-//            binding.userAnswerText.setText(question.getUserAnswer());
-            //binding.userEditAnswerText.setVisibility(View.GONE);
-            //binding.submit.setVisibility(View.GONE);
-          //} else {
-//            Toast.makeText(
-//                getContext(), "here", Toast.LENGTH_SHORT).show();
-            binding.userAnswerText.setVisibility(View.GONE);
-          //}
+          binding.userAnswerText.setVisibility(View.GONE);
         });
-        historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
-          Log.d(getClass().getSimpleName(), histories.toString());
-          if (histories != null && !histories.isEmpty()) {
-             History history = histories.get(0);
-            binding.userAnswerText.setText(history.getAnswer());
-            binding.userAnswerText.setVisibility(View.VISIBLE);
-          }
-          else {
-            binding.userAnswerText.setVisibility(View.GONE);
-          }
-        });
+    historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
+      Log.d(getClass().getSimpleName(), histories.toString());
+      if (histories != null && !histories.isEmpty()) {
+        History history = histories.get(0);
+        binding.userAnswerText.setText(history.getAnswer());
+        binding.userAnswerText.setVisibility(View.VISIBLE);
+      } else {
+        binding.userAnswerText.setVisibility(View.GONE);
+      }
+    });
   }
 
 

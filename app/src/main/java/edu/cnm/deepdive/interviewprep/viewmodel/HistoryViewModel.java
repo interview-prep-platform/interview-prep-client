@@ -87,23 +87,6 @@ public class HistoryViewModel extends AndroidViewModel implements DefaultLifecyc
    *
    * @param question An updated {@link Question} object.
    */
-//  public void updateHistory(History history, Question question) {
-//    pending.add(
-//        repository
-//            .updateHistory(question)
-//            .subscribe(
-//                (postedQuestion) -> {
-//                  this.question.postValue(postedQuestion);
-//                  List<Question> questions = this.questions.getValue();
-//                  Question question2 = findQuestion(postedQuestion.getId(), questions);
-//                  int indexOfQuestion = questions.indexOf(question2);
-//                  questions.set(indexOfQuestion, postedQuestion);
-//                  this.questions.postValue(questions);
-//                },
-//                this::postThrowable
-//            )
-//    );
-//  }
 
 
   /**
@@ -129,34 +112,6 @@ public class HistoryViewModel extends AndroidViewModel implements DefaultLifecyc
             )
     );
   }
-
-//  public void refreshHistory(UUID historyId) {
-//    pending.add(
-//        repository
-//            .getHistory(historyId)
-//            .subscribe(
-//                history::postValue,
-//                this::postThrowable
-//            )
-//    );
-//  }
-
-
-//  public void deleteHistory(UUID questionId) {
-//    pending.add(
-//        repository
-//            .deleteHistory(questionId)
-//            .subscribe(
-//                () -> {
-//                  List<History> histories = this.histories.getValue();
-//               ***   histories.removeIf((question) -> question.getId().equals(questionId));
-//                  this.histories.postValue(histories);
-//                },
-//                this::postThrowable
-//            )
-//    );
-//  }
-
 
   @Override
   public void onStop(@NonNull LifecycleOwner owner) {

@@ -41,7 +41,6 @@ public class QuizViewModel extends AndroidViewModel implements DefaultLifecycleO
     answer = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
-    refreshQuestion();
   }
 
   /**
