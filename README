@@ -32,4 +32,6 @@ The app can be accessed and tested through the release version deployed to our c
 
 # Other Supporting Information
 
+Note: When saving questions to the database, you can only edit and delete questions that you create. 
+
 https://interview-prep-platform.github.io/
