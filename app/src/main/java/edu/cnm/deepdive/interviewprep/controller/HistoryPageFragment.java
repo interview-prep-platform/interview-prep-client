@@ -14,24 +14,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.interviewprep.R;
+import edu.cnm.deepdive.interviewprep.databinding.FragmentHistoryPageBinding;
 import edu.cnm.deepdive.interviewprep.databinding.FragmentQuizPageBinding;
 import edu.cnm.deepdive.interviewprep.model.History;
-import edu.cnm.deepdive.interviewprep.model.Question;
 import edu.cnm.deepdive.interviewprep.viewmodel.HistoryViewModel;
 import edu.cnm.deepdive.interviewprep.viewmodel.QuestionViewModel;
 
-public class QuizPageFragment extends Fragment {
+public class HistoryPageFragment extends Fragment {
 
-  private FragmentQuizPageBinding binding;
+  private FragmentHistoryPageBinding binding;
   private QuestionViewModel questionViewModel;
   private HistoryViewModel historyViewModel;
-  private Question question;
+
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    binding = FragmentQuizPageBinding.inflate(getLayoutInflater(), container, false);
+    binding = FragmentHistoryPageBinding.inflate(getLayoutInflater(), container, false);
     binding.questionText.setText("");
     binding.questionText.setMovementMethod(new ScrollingMovementMethod());
     binding.answerText.setText("");
@@ -39,7 +39,6 @@ public class QuizPageFragment extends Fragment {
     binding.sourceText.setText("");
     binding.userAnswerText.setText("");
     binding.userAnswerText.setMovementMethod(new ScrollingMovementMethod());
-    binding.userEditAnswerText.setText("");
     binding.answerText.setVisibility(View.GONE);
     binding.showAnswer.setText(R.string.show_answer_button);
     binding.showAnswer.setOnClickListener(new OnClickListener() {
@@ -54,22 +53,6 @@ public class QuizPageFragment extends Fragment {
         }
       }
     });
-    binding.submit.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        binding.userAnswerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
-        binding.userAnswerText.setText(binding.userEditAnswerText.getText().toString().trim());
-        History history = new History();
-        history.setAnswer(binding.userEditAnswerText.getText().toString().trim());
-        historyViewModel
-            .createHistory(history, question);
-        binding.userEditAnswerText.setVisibility(View.GONE);
-        binding.submit.setVisibility(View.GONE);
-        binding.userAnswerText.setVisibility(View.VISIBLE);
-        Toast.makeText(
-            getContext(), "Your Answer has been Submitted", Toast.LENGTH_SHORT).show();
-      }
-    });
     return binding.getRoot();
   }
 
@@ -82,10 +65,11 @@ public class QuizPageFragment extends Fragment {
         .getQuestion()
         .observe(getViewLifecycleOwner(), (question) -> {
           Log.d(getClass().getSimpleName(), "question is: " + question.getQuestion().toString());
-          this.question = question;
+          historyViewModel.refreshHistories(question.getId());
           binding.questionText.setText(question.getQuestion());
           binding.answerText.setText(question.getAnswer());
           binding.sourceText.setText(question.getSource());
+          binding.userAnswerText.setVisibility(View.GONE);
         });
     historyViewModel.getHistories().observe(getViewLifecycleOwner(), (histories) -> {
       Log.d(getClass().getSimpleName(), histories.toString());
@@ -93,13 +77,8 @@ public class QuizPageFragment extends Fragment {
         History history = histories.get(0);
         binding.userAnswerText.setText(history.getAnswer());
         binding.userAnswerText.setVisibility(View.VISIBLE);
-        binding.submit.setVisibility(View.GONE);
-        binding.userEditAnswerText.setVisibility(View.GONE);
       } else {
-        binding.userEditAnswerText.setVisibility(View.VISIBLE);
         binding.userAnswerText.setVisibility(View.GONE);
-        binding.userEditAnswerText.setVisibility(View.VISIBLE);
-        binding.submit.setVisibility(View.VISIBLE);
       }
     });
   }

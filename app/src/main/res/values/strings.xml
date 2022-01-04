@@ -31,4 +31,8 @@
   <string name="show_answer">Show Answer</string>
   <string name="show_answer_button">Show Answer</string>
   <string name="hide_answer_button">Hide Answer</string>
+
+  <string name="quiz_length_pref_title">Quiz length</string>
+  <string name="quiz_length_pref_key">quiz_length_pref</string>
+
 </resources>

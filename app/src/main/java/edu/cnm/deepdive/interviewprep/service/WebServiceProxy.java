@@ -52,6 +52,9 @@ public interface WebServiceProxy {
   @GET("questions/random")
   Single<Question> getRandomQuestion(@Header("Authorization") String bearerToken);
 
+  @GET("questions/random")
+  Single<List<Question>> getRandomQuestions(@Query("quizlength") int quizlength,@Header("Authorization") String bearerToken);
+
   /**
    * This method defines the behavior of a GET request to the URL /interviewprep/questions/questionId.
    *   It returns a single question from the server.

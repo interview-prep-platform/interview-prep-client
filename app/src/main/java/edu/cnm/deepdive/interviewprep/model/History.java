@@ -15,6 +15,7 @@ public class History {
   @Expose
   private String answer;
 
+  private Question question;
 
   /**
    * Returns a unique identifier for this instance.
@@ -43,5 +44,13 @@ public class History {
    */
   public void setAnswer(String answer) {
     this.answer = answer;
+  }
+
+  public Question getQuestion() {
+    return question;
+  }
+
+  public void setQuestion(Question question) {
+    this.question = question;
   }
 }

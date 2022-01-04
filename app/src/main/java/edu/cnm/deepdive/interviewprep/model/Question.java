@@ -22,9 +22,6 @@ public class Question implements Comparable<Question> {
   @Expose
   private String source;
 
-  @Expose
-  private String userAnswer;
-
   /**
    * Returns a unique identifier for this instance.
    */
@@ -88,11 +85,4 @@ public class Question implements Comparable<Question> {
     return this.question.compareToIgnoreCase(other.question);
   }
 
-  public String getUserAnswer() {
-    return userAnswer;
-  }
-
-  public void setUserAnswer(String userAnswer) {
-    this.userAnswer = userAnswer;
-  }
 }
