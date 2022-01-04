@@ -1,0 +1,33 @@
+# Application Title
+
+Interview Prep
+
+
+# Contact Information
+
+* Cindy Nikolai: team lead: prefer not to specify email or phone publically - will email to appcontest@unm.edu.  
+* Sergio Valdez
+* Zac Ramsey
+
+
+# Short Bio of Developer/Team
+
+* Cindy Nikolai
+Cindy Nikolai is a retired Air Force officer who holds a degree in computer science from the University of Notre Dame. Born in the Netherlands, Cynthia lived near Air Force Bases in the Netherlands and Germany until age eleven when she, along with her parents and two brothers, moved to Waldorf, Maryland. With her sights on a military career, she earned a BS in math from Villanova University while enrolled in ROTC. Her work in missile defense spanned several states and command positions before she earned her Master’s in computer science from the University of Massachusetts, Amherst and went on, in the Civilian Institution Program, to earn her doctorate. Today, she is retired and living in South Bend, Indiana, where she focuses her time on software engineering, community service.
+
+
+# Description of the App
+
+This Android application is designed to help prospective employees and interviewers in the IT field prepare for the big day. Coming with preset questions and self-created interview quizzes, a user can comfortably practice for a variety of different interviews in the tech field. A custom question feature makes it accessible for interviewers to use, quizzing applicants on whatever they seek to know.
+
+The application (client and server together) stores general interview questions as well as detailed technical interview questions. Additionally, it stores a good example answer for each question while allowing the user to store additional questions and answers for self practice. We chose a professional color scheme intended to help put the user’s mind at ease as they prepare for a stressful interview.
+
+
+# Access Information
+
+The app can be accessed and tested through the release version deployed to our client side github repository.  You will need a personal google sign-in account to sign-in to the app.   
+
+
+# Other Supporting Information
+
+https://interview-prep-platform.github.io/
